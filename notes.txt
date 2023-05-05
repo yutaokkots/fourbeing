@@ -32,3 +32,14 @@ Django REST framework
 
 https://lucid.app/lucidchart/7aef38fc-2ce1-4d1b-8a97-8f22d22010bd/edit?invitationId=inv_b2d40ba1-375b-41d7-8a88-12f69dd7125b&page=0_0#
 
+
+
+built-in urls for authorization
+accounts/login/ [name='login']
+accounts/logout/ [name='logout']
+accounts/password_change/ [name='password_change']
+accounts/password_change/done/ [name='password_change_done']
+accounts/password_reset/ [name='password_reset']
+accounts/password_reset/done/ [name='password_reset_done']
+accounts/reset/<uidb64>/<token>/ [name='password_reset_confirm']
+accounts/reset/done/ [name='password_reset_complete']
