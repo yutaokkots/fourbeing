@@ -1,0 +1,34 @@
+https://m.youtube.com/watch?v=ntgKH7KUaNM
+https://www.geeksforgeeks.org/how-to-create-tinder-card-swipe-gesture-using-react-and-framer-motion/
+https://github.com/markerikson/react-redux-links
+https://www.richardtwatson.com/open/Reader/_book/one-to-one-and-recursive-relationships.html
+
+backend:
+
+create virtual environment
+in backend folder:
+    % python3 -m venv .venv
+    % . .venv/bin/activate
+    % python3 -m pip install django
+    % django-admin startproject backendserver .
+    % python3 manage.py runserver
+
+    % touch .gitignore
+    git init
+
+    into virtual environment
+    % . .venv/bin/activate
+    % python --version
+    % pip --version
+
+    install django-rest-framework
+    https://www.django-rest-framework.org/
+    % pip install django-rest-framework
+
+    % pip freeze > requirements.txt     #save package information
+    % pip install -r requirements.txt   #go through file to install packages
+
+Django REST framework 
+
+https://lucid.app/lucidchart/7aef38fc-2ce1-4d1b-8a97-8f22d22010bd/edit?invitationId=inv_b2d40ba1-375b-41d7-8a88-12f69dd7125b&page=0_0#
+
