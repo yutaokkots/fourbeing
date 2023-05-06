@@ -12,7 +12,6 @@ class Profile(models.Model):
     username = models.CharField(max_length=20)
     profile = models.CharField(max_length=100)
     
-
 class Post(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=2000)
@@ -27,3 +26,9 @@ class Reply(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
+# This test class was created to experiment with initial api calls
+class Test(models.Model):
+  name = models.CharField(max_length=50)
+  description = models.CharField(max_length=100)
+  def __str__(self):
+    return f"This test returned: ${self.name}"
