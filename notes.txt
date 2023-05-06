@@ -28,6 +28,15 @@ in backend folder:
     % pip freeze > requirements.txt     #save package information
     % pip install -r requirements.txt   #go through file to install packages
 
+    # reate a new db
+    % createdb fourbeing
+
+    # create new app within project
+    % python3 manage.py startapp fourbeing 
+
+    # migrate
+    % python3 manage.py migrate
+
 Django REST framework 
 
 https://lucid.app/lucidchart/7aef38fc-2ce1-4d1b-8a97-8f22d22010bd/edit?invitationId=inv_b2d40ba1-375b-41d7-8a88-12f69dd7125b&page=0_0#
