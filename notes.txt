@@ -111,7 +111,7 @@ https://github.com/adamchainz/django-cors-headers
         'http://127.0.0.1:5173',
     ]
 
-
+INSTALL REACT-APP
 6) install React App
     1. % npm create vite@latest
     ✔ Project name: … mern-infrastructure
@@ -145,6 +145,8 @@ https://github.com/adamchainz/django-cors-headers
                 └── App
                     ├── App.css
                     └── App.jsx
+    6. install react-router-dom
+        % npm i react-router-dom
 
 
 
