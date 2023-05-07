@@ -1,26 +1,21 @@
-import React, { useState } from 'react'
-import { useEffect } from 'react' 
+import { useState, useEffect } from 'react'
 import * as postsAPI from '../../utilities/posts_api'
+import Navbar from '../../components/Navbar/Navbar'
 import Postcard from '../../components/Postcard/Postcard'
 
 export default function Dashboard() {
-    const [allPosts, setAllPosts] = useState([])
+    const [allPosts, setAllPosts] = useState([""])
 
     useEffect(() => {
         async function getPosts(){
-            console.log("At the Dashboard before the try-catch")
             try{
-                console.log("At the Dashboard")
-                
                 postsAPI.getPost().then((response) => {
+                    return response.test
+                }).then((response)=>{
                     setAllPosts(response)
-                    console.log(response)
+                }).catch(error => {
+                    throw(error);
                 })
-                
-                const posts = postsAPI.getPost()
-                let postList = posts.test
-                console.log(postList)
-                setAllPosts(postList)
             }
             catch(err){
                 console.log('err', err)
@@ -29,15 +24,15 @@ export default function Dashboard() {
         getPosts()
     }, [])
 
-    console.log(allPosts)
     return (
         <>
-        <div>Dashboard</div>
-        <div>
-            {allPosts.map((post, idx) => 
-                <Postcard key={idx} post={post}/>)
-            }
-        </div>
+            <Navbar />
+            <div>Dashboard</div>
+            <div>
+                {allPosts?.map((post, idx) => 
+                    <Postcard  post={post} key={idx}/>)
+                }
+            </div>
         </>
 
     )

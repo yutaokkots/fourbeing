@@ -1,17 +1,16 @@
-import { useState } from 'react'
+
 import { Routes, Route } from 'react-router-dom'
 import Dashboard from './Dashboard/Dashboard'
-import Navbar from '../components/Navbar/Navbar'
+
 
 import './App.css'
 
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
 
   return (
     <>
-      <Navbar />
+
       <Routes>
           <Route path='/' element={<Dashboard />} />
       </Routes>
@@ -20,7 +19,7 @@ function App() {
   )
 }
 
-export default App
+
 
 
 // <h1 className="text-2xl font-bold underline text-blue-600 ">

@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 export default function Navbar() {
     let links = [
@@ -16,7 +16,7 @@ export default function Navbar() {
                     <span><a href="/" className="site-title">Site Name</a></span>
                     <ul className="md:flex md:item-center">
                         {links.map((link, idx) => 
-                        <li className="md:ml-8 text-xl"> 
+                        <li key={idx} className="md:ml-8 text-xl"> 
                             <a className="text-gray-800 hover:text-gray-400 duration-300" href={ link.link }>{ link.name }</a>
                         </li>
                         )} 
