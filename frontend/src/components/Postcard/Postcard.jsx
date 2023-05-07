@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 export default function Postcard({ post }) {
 
   return (
-    
     <>
         <div>Postcard</div>
         <h1>{ post.id }</h1>
@@ -14,5 +13,5 @@ export default function Postcard({ post }) {
 }
 
 Postcard.propTypes = {
-  post: PropTypes.object.isRequired
+  post: PropTypes.string
 }

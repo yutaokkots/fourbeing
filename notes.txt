@@ -8,10 +8,11 @@ https://blog.devgenius.io/django-rest-knox-token-authentication-f134760a4a7b
 https://james1345.github.io/django-rest-knox/
 https://github.com/James1345/django-rest-knox
 https://www.django-rest-framework.org/api-guide/authentication/
+https://james1345.github.io/django-rest-knox/installation/
 
 declaring prop types in eslint
 https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md
-
+https://www.npmjs.com/package/prop-types
 
 backend:
 
@@ -180,12 +181,27 @@ INSTALL REACT-APP
         https://stackoverflow.com/questions/70973306/how-to-convert-postcss-config-js-and-tailwind-config-js-to-es-modules
         /* eslint-env node */
 
-    8. 
+    8. Set up front end to include proper Pages and componets, and fetch() from backend 
+        e.g. by fetching from http://localhost:8000/api/...
 
+INSTALL KNOX for authentication in backend
+7) install rest-knox for token-based authentication. 
+    # enter virtual environment
+    % . .venv/bin/activate
 
+    # install rest-knox
+    % pip install django-rest-knox
 
+    # save to requirements.txt
+    % pip freeze > requirements.txt
 
-
+    #knox set up
+        INSTALLED_APPS = [
+            ...
+            'rest_framework',
+            'knox',
+            ...
+        }
 
 
 

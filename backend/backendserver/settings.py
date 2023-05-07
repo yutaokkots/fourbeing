@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
+    'knox',
     'fourbeing',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -112,6 +113,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+## rest_framework
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
