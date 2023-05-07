@@ -5,6 +5,7 @@ https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using
 
 backend:
 
+
 create virtual environment and create project
 1) in backend folder:
     % python3 -m venv .venv
@@ -14,7 +15,8 @@ create virtual environment and create project
     % python3 manage.py runserver
 
     % touch .gitignore
-    git init
+        make sure to include relevant git-ignore files listed in .gitignore
+    % git init
 
     into virtual environment
     % . .venv/bin/activate
@@ -112,6 +114,11 @@ https://github.com/adamchainz/django-cors-headers
     ]
 
 INSTALL REACT-APP
+    * unlike previous versions of MERN apps, did not include the following:
+        - 'MORGAN' <- for server-side debugging. But still not sure. 
+        - 'mongoose' <- for MongoDB
+        - 'bcrypt'
+        - 'jsonwebtoken' <- still unsure about this one. 
 6) install React App
     1. % npm create vite@latest
     ✔ Project name: … mern-infrastructure
