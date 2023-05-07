@@ -152,9 +152,25 @@ INSTALL REACT-APP
                 └── App
                     ├── App.css
                     └── App.jsx
-    6. install react-router-dom
+    6. react-router-dom 
+        A) install react-router-dom
         % npm i react-router-dom
+        B) protect routes: 'frontend/src/main.js'
+            import { BrowserRouter as Router } from 'react-router-dom'
 
+            ReactDOM.createRoot(document.getElementById('root')).render(
+            <React.StrictMode>
+                <Router><App /></Router>
+            </React.StrictMode>,
+            )
+
+    7. A note with tailwindcss, had to include the following Code  
+        at the top of the postcss.config.cjs file and tailwind.config.js
+        files, in order for the modules.exports to be read.
+        https://stackoverflow.com/questions/70973306/how-to-convert-postcss-config-js-and-tailwind-config-js-to-es-modules
+        /* eslint-env node */
+
+    8. 
 
 
 
