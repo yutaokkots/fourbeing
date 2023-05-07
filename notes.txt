@@ -1,7 +1,7 @@
 https://m.youtube.com/watch?v=ntgKH7KUaNM
-https://www.geeksforgeeks.org/how-to-create-tinder-card-swipe-gesture-using-react-and-framer-motion/
 https://github.com/markerikson/react-redux-links
 https://www.richardtwatson.com/open/Reader/_book/one-to-one-and-recursive-relationships.html
+https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react
 
 backend:
 
