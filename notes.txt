@@ -3,6 +3,12 @@ https://github.com/markerikson/react-redux-links
 https://www.richardtwatson.com/open/Reader/_book/one-to-one-and-recursive-relationships.html
 https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react
 
+Django authentication notes
+https://blog.devgenius.io/django-rest-knox-token-authentication-f134760a4a7b
+https://james1345.github.io/django-rest-knox/
+https://github.com/James1345/django-rest-knox
+https://www.django-rest-framework.org/api-guide/authentication/
+
 backend:
 
 

@@ -5,11 +5,12 @@ module.exports = {
   theme: {
     extend:{
       colors: {
-        'ocean' : '#8cb1c6',
-        'land': '#d6b469',
-        'sunset': '#f6851f',
-        'cardamom':'#9e5224',
-        'vanilla':'#fcf5eb'
+        'midnight': '#091123',
+        'afterhour':'#212A3E',
+        'moonlight':'#F1F6F9',
+        'regal': '#34172D',
+        'lining':'#d678a4',
+
       },       
         fontFamily:{
         'serif': ['Marko One', 'serif'],
