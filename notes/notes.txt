@@ -13,16 +13,18 @@ https://blog.devgenius.io/django-rest-knox-token-authentication-f134760a4a7b
 https://www.youtube.com/watch?app=desktop&v=0d7cIfiydAc
 https://stackoverflow.com/questions/48943331/django-restframework-extra-kwargs-not-working
 
-
 https://medium.com/technest/implement-user-auth-in-a-django-react-app-with-knox-fc56cdc9211c
 https://github.com/kjmczk/DjangoReactTodo
 
 https://soshace.com/react-user-login-authentication-using-usecontext-and-usereducer/
 
-
-declaring prop types in eslint
+declaring prop types in eslint:
 https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md
 https://www.npmjs.com/package/prop-types
+
+placing react frontend within same folder as django, and using templates to render react
+https://blog.logrocket.com/using-react-django-create-app-tutorial/
+
 
 backend:
 

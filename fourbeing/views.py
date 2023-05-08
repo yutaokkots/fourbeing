@@ -30,6 +30,11 @@ from knox.auth import AuthToken
 #     serializer_class = UserSerializer
 
 
+def indexview(request, *args, **kwargs):
+    return render(request, 'fourbeing/index.html')
+    pass
+
+
 class CreateUserView(generics.CreateAPIView):
     serializer_class = UserSerializer
 
