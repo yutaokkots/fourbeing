@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
+    'useraccounts',
     'knox',
     'fourbeing',
     'django.contrib.admin',
@@ -117,7 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ## rest_framework
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication'),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+
+        'knox.auth.TokenAuthentication',),
 }
 
 ## rest_knox

@@ -10,6 +10,7 @@ from rest_framework.validators import UniqueValidator
 from rest_framework.response import Response
 from knox.auth import AuthToken
 
+
 class TestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Test
@@ -61,4 +62,5 @@ class AuthSerializer(serializers.Serializer):
         
         attrs['user'] = user
         return 
+
 

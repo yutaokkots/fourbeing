@@ -19,8 +19,9 @@ https://github.com/kjmczk/DjangoReactTodo
 
 https://soshace.com/react-user-login-authentication-using-usecontext-and-usereducer/
 
-Django-rest_framework-knoxhttps://www.youtube.com/watch?v=s3jTweZiqfI
-
+Django-rest_framework-knox
+https://www.youtube.com/watch?v=s3jTweZiqfI
+https://www.youtube.com/watch?v=0d7cIfiydAc ###
 
 declaring prop types in eslint
 https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md

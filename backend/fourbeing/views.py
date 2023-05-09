@@ -41,7 +41,8 @@ class CreateUserView(generics.CreateAPIView):
         print(token)
         return Response({
             "users": UserSerializer(user, context=self.get_serializer_context()).data,
-            "token": token[1]
+            "token": token
+            # "exp:": 
         })
 
 
@@ -60,9 +61,7 @@ class CreateUserView(generics.CreateAPIView):
 
 
 
-
 class LoginView(KnoxLoginView):
-    authentication_classes = api_settings.DEFAULT_AUTHENTICATION_CLASSES
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_context(self):
