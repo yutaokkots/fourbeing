@@ -15,7 +15,7 @@ function reducer(state, action){
 
 export default function App() {
     const [state, dispatch] = useReducer(reducer, {login: true})
-    const [user, setUser] = useState(usersAPI.getUser())
+    const [user, setUser] = useState(true) //usersAPI.getUser()
 
 
     return (

@@ -10,13 +10,13 @@ export default function ToggleButton({toggler, toggleState}) {
     <>
         <div className=''>
             <div>
-                {toggleState > 0 ? 'Already registered?' : 'New User?'}<span> </span>
+                {toggleState < 0 ? 'Already registered?' : 'New User?'}<span> </span>
                 </div>
                 <div>
                 <button
                     className="text-land"
                     onClick={handleClick}
-                >{toggleState > 0 ? 'Log in' : 'Sign up'}</button>
+                >{toggleState < 0 ? 'Log in' : 'Sign up'}</button>
             </div>
         </div>
     </>

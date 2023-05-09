@@ -1,11 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
 import * as userService from '../../utilities/users-service'
-
+import { Link } from 'react-router-dom'
 const initialState = {
     username: '',
     email: '',
     password:'',
+    password2:''
 
 }
 
@@ -22,6 +23,7 @@ export default function LoginForm({ user, setuser }) {
     // handlesubmit() -> invokes signUp() function 
     async function handleSubmit(evt){
         evt.preventDefault();
+        console.log("submitted")
         try {
             console.log("handleSubmit")
             console.log(credentials)
@@ -66,9 +68,19 @@ export default function LoginForm({ user, setuser }) {
                             onChange={handleChange}
                             required></input>
                     </div>
+                    <div className='relative flex-row justify-between mt-2 mb-2'>
+                        <label>confirm password</label>
+                        <input 
+                            type="password" 
+                            name="password2" 
+                            value={credentials.password2}
+                            onChange={handleChange}
+                            required></input>
+                    </div>
                     <button className=' text-cardamom bg-vanilla hover:bg-land hover:text-vanilla py-1 px-1 rounded mt-5 mb-5' 
                         type="submit" 
-                        >SIGN UP</button>
+
+                        ><Link to="/signup">Sign up</Link></button>
                 </form>
 
             </div>
