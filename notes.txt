@@ -19,6 +19,8 @@ https://github.com/kjmczk/DjangoReactTodo
 
 https://soshace.com/react-user-login-authentication-using-usecontext-and-usereducer/
 
+Django-rest_framework-knoxhttps://www.youtube.com/watch?v=s3jTweZiqfI
+
 
 declaring prop types in eslint
 https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md
@@ -194,7 +196,7 @@ INSTALL REACT-APP
     8. Set up front end to include proper Pages and componets, and fetch() from backend 
         e.g. by fetching from http://localhost:8000/api/...
 
-INSTALL KNOX for authentication in backend
+INSTALL KNOX for authentication in backend (Django)
 7) install rest-knox for token-based authentication. 
     # enter virtual environment
     % . .venv/bin/activate

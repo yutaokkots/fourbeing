@@ -117,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ## rest_framework
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication'),
 }
 
 ## rest_knox

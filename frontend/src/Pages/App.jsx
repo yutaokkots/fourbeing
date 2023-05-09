@@ -2,21 +2,32 @@
 import { Routes, Route } from 'react-router-dom'
 import Dashboard from './Dashboard/Dashboard'
 
+import { useReducer, useState } from 'react'
+import AuthPage from './AuthPage/AuthPage'
 
 import './App.css'
+import * as usersAPI from '../utilities/users-service'
+
+function reducer(state, action){
+
+}
 
 
 export default function App() {
+    const [state, dispatch] = useReducer(reducer, {login: true})
+    const [user, setUser] = useState(usersAPI.getUser())
 
-  return (
-    <>
 
-      <Routes>
-          <Route path='/' element={<Dashboard />} />
-      </Routes>
+    return (
+        <>
 
-    </>
-  )
+            <Routes>
+                <Route path='/' element={<Dashboard user={ user }/>} />
+                <Route path='/login' element={<AuthPage user={ user } setUser={ setUser}/>} />
+            </Routes>
+
+        </>
+    )
 }
 
 
