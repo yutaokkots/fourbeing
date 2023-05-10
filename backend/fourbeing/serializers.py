@@ -3,6 +3,7 @@ from fourbeing.models import Test
 
 # serializer for create_user request
 from django.contrib.auth.models import User
+from fourbeing.models import Post
 from django.contrib.auth import authenticate, get_user_model
 
 from rest_framework.validators import UniqueValidator
@@ -11,10 +12,16 @@ from rest_framework.response import Response
 from knox.auth import AuthToken
 
 
+class PostSerializer(serializers.Serializer):
+    class Meta:
+        model = Post
+        fields = ('id','title', 'description', 'created')
+
+
 class TestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Test
-        fields = '__all__'
+        fields = ('name', 'description')
 
 
 

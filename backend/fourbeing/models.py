@@ -4,7 +4,7 @@ from django.db import models
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
-
+from django.utils import timezone
 
 
 class Profile(models.Model):
@@ -15,10 +15,11 @@ class Profile(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=2000)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    #profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    created=models.DateTimeField(auto_now_add=True)
 
     def __str__ (self):
-        return f"New post: called {self.title} by {self.profile.username}"
+        return f"New post: called '{self.title}'"
     
 class Reply(models.Model):
     comment = models.CharField(max_length=2000)

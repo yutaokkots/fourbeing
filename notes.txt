@@ -27,6 +27,17 @@ declaring prop types in eslint
 https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md
 https://www.npmjs.com/package/prop-types
 
+token expiry
+https://stackoverflow.com/questions/74307012/how-to-refresh-token-after-expiry-in-django-knox-authentication
+https://stackoverflow.com/questions/55538458/django-rest-with-jwt-getting-attributeerror-invalid-api-setting-jwt-payload
+Using useContext for auth state
+https://blog.devgenius.io/django-rest-framework-react-authentication-workflow-2022-part-2-d299b7fef875
+https://testdriven.io/blog/django-spa-auth/
+
+jwt
+https://github.com/jod35/Building-APIS-with-DRF/blob/main/posts/apps.py
+https://www.youtube.com/watch?v=mm6vlnWXFdM&list=PLEt8Tae2spYlosWRH9JDpKNxzb3bSOJGx&index=8
+
 backend:
 
 

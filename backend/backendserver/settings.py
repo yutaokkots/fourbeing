@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'useraccounts',
     'knox',
     'fourbeing',
+    'rest_framework_simplejwt',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -119,10 +120,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-
-        'knox.auth.TokenAuthentication',),
+        'knox.auth.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        ),
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
 }
-
+ 
 ## rest_knox
 
 from datetime import timedelta
@@ -137,7 +142,14 @@ REST_KNOX = {
     'EXPIRY_DATETIME_FORMAT': api_settings.DATETIME_FORMAT,
 }
 
+#simple jwt
 
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "SIGNING_KEY": "hello", #settings.SECRET_KEY
+    "AUTH_HEADER_TYPES": ("Bearer",)
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

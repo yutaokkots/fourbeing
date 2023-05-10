@@ -79,8 +79,8 @@ export default function LoginForm({ user, setuser }) {
                     </div>
                     <button className=' text-cardamom bg-vanilla hover:bg-land hover:text-vanilla py-1 px-1 rounded mt-5 mb-5' 
                         type="submit" 
-
-                        ><Link to="/signup">Sign up</Link></button>
+                        
+                        >SIGN UP</button>
                 </form>
 
             </div>

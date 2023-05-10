@@ -1,5 +1,5 @@
 
-const BASE_URL = "http://localhost:8000/api"
+const BASE_URL = "http://localhost:8000/api/topic"
 
 
 export default async function sendRequest(url, method = 'GET', payload = null) {

@@ -29,10 +29,13 @@ export default function Dashboard({ user }) {
             <Navbar />
            
             <div>Dashboard</div>
-            <div>
+            <div className="col-span-8">
                 {allPosts?.map((post, idx) => 
                     <Postcard  post={post} key={idx}/>)
                 }
+            </div>
+            <div className="col-span-8">
+                <h1> second column </h1>
             </div>
             {
             user ? <h2>The user is logged in</h2>    

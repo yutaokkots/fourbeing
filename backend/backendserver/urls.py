@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # re_path(r'api/auth/', include('knox.urls')),
     path('api/auth/', include('useraccounts.urls')),
+    path('api/e/', include('fourbeing.urls'))
 ]
