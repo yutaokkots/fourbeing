@@ -12,27 +12,22 @@ from rest_framework.response import Response
 # from knox.auth import AuthToken
 
 
-class PostSerializer(serializers.Serializer):
-    # id = serializers.IntegerField()
-    # username = serializers.CharField()
-    # description = serializers.CharField()
-    # created = serializers.DateTimeField()
-    model = Post
-    fields = ('id','title', 'description', 'created')
-    # class Meta:
-    #     model = Post
-    #     fields = ('id','title', 'description', 'created')
-    #     extra_kwargs = {
-    #         'title': {'required': True},
-    #         'description': {'required': True},
-    #     }
+class PostSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField()
+    title = serializers.CharField()
+    description = serializers.CharField()
+    created = serializers.DateTimeField()
 
-    def create(self, validated_data):
-        post = Post.objects.create(
-            title=validated_data['title'],
-            description=validated_data['description'],
-        )
-        return post
+    class Meta:
+        model = Post
+        fields = ['id','title', 'description', 'created']
+        # extra_kwargs = {
+        #     'title': {'required': True},
+        #     'description': {'required': True},
+        # }
+
+
+
 
 class TestSerializer(serializers.ModelSerializer):
     class Meta:

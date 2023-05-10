@@ -2,20 +2,20 @@
 import { Routes, Route } from 'react-router-dom'
 import Dashboard from './Dashboard/Dashboard'
 
-import { useReducer, useState } from 'react'
+import { useReducer, useState, useContext } from 'react'
 import AuthPage from './AuthPage/AuthPage'
 
 import './App.css'
 import * as usersAPI from '../utilities/users-service'
 
-function reducer(state, action){
 
-}
+export const AuthContext = React.createContext()
+
 
 
 export default function App() {
     const [state, dispatch] = useReducer(reducer, {login: true})
-    const [user, setUser] = useState(true) //usersAPI.getUser()
+    const [user, setUser] = useState(usersAPI.getUser)
 
 
     return (

@@ -19,10 +19,9 @@ posts = [
 # api/e/fourbeing/
 @api_view(http_method_names=["GET"])
 def fourbeing_index(request):
-    serializer_class = PostSerializer 
-
-    try:
-        all_posts = Post.objects.all()
+    serializer_class = PostSerializer
+    all_posts = Post.objects.all()
+    if request.method == "GET":
         serializer = PostSerializer(instance=all_posts, many=True)
         print(serializer)
         print(serializer.data)
@@ -31,8 +30,7 @@ def fourbeing_index(request):
             "data": serializer.data,
         }
         return Response(data=response.data, status=status.HTTP_200_OK)
-    except Exception as e:
-        return Response(data=e.args, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 # allows the creation of new posts
@@ -42,19 +40,18 @@ def createpost(request):
     if request.method == "POST":
         data = request.data
         serializer = PostSerializer(data=data)
-        try:
-            if serializer.is_valid():
+        if serializer.is_valid():
+            try:
+                serializer.is_valid(raise_exception=True)
                 serializer.save()
                 response = {
                     "message": "Post created",
                     "data": serializer.data
                 }
                 return Response(data=response, status=status.HTTP_201_CREATED)
-        except Exception as exception:
-            return Response(data=exception.args, status=status.HTTP_400_BAD_REQUEST)
+            except Exception as exception:
+                return Response(data=exception.args, status=status.HTTP_400_BAD_REQUEST)
             
-
-
 
 
 @api_view(http_method_names=["GET", "POST"])
@@ -67,6 +64,8 @@ def homepage(request):
     response = {"message": "Hello World"}
     return Response(data=response, status=status.HTTP_200_OK)
 
+# allows the retrieval of a single post
+# api/e/fourbeing/<post_id>/
 @api_view(http_method_names=["POST"])
 def post_detail(request, post_id: int):
     post = get_object_or_404(Post, pk=post_id)
@@ -74,23 +73,47 @@ def post_detail(request, post_id: int):
     response = {
         "message":"post",
         "data":serializer.data
-    }
-    
+    }    
     return Response(data=response, status=status.HTTP_200_OK)
-    return Response(data={"error": "Post not found"}, status=status.HTTP_200_OK)
 
+# allows the update of a post
+# api/e/fourbeing/<post_id>/
 
-@api_view(http_method_names=["PUT"])
+# def post_update(request, post_id: int):
+#     post = get_object_or_404(Post, id=post_id)
+#     print(post)
+#     if request.method == "PUT":
+#         data = request.data
+#         print(data)
+#         serializer = PostSerializer(post)
+#         if serializer.is_valid():
+#             try:
+#                 serializer.is_valid(raise_exception=True)
+#                 serializer.save()
+#                 response = {
+#                     "message": "Post updated",
+#                     "data": serializer.data
+#                 }
+#                 return Response(data=response, status=status.HTTP_201_CREATED)
+#             except Exception as exception:
+#                 return Response(data=exception.args, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(http_method_names=["PUT", "DELETE"])            
 def post_update(request, post_id: int):
-    # post = get_object_or_404(Post, pk=post_id)
-
-    # if post:
-    #     return Response(data=post, status=status.HTTP_200_OK)
-    
-    # return Response(data={"error": "Post not found"}, status=status.HTTP_200_OK)
-    pass
-
-@api_view(http_method_names=["DELETE"])
+    post = get_object_or_404(Post, id=post_id)
+    data = request.data
+    if request.method == "PUT":
+        serializer = PostSerializer(instance=post, data=data, partial=True)
+        print(serializer)
+        print(serializer.is_valid)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if request.method == "DELETE":
+        post.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+        
 def post_delete(request, post_id: int):
     # post = get_object_or_404(Post, pk=post_id)
 

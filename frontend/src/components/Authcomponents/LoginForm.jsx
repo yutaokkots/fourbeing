@@ -6,7 +6,7 @@ const initialState = {
     password: ''
 }
 
-export default function LoginForm() {
+export default function LoginForm({ user, setUser }) {
     const [credentials, setCredentials] = useState(initialState);
     const [error, setError] = useState('');
     
@@ -19,6 +19,7 @@ export default function LoginForm() {
         evt.preventDefault();
         try {
           const user = await userService.login(credentials);
+          console.log(user)
           setUser(user);
         } catch {
           setError('Log In Failed - Try Again');
@@ -31,8 +32,9 @@ export default function LoginForm() {
                     <form autoComplete="off" onSubmit={handleSubmit}>
                     <div className='relative flex-row justify-between  mt-2 mb-2'>
                         <div><label>Username</label></div>
-                        <div><input className='text-cardamom' type="text" name="email" value={credentials.login} onChange={handleChange} required /></div>
+                        <div><input className='text-cardamom' type="text" name="username" value={credentials.login} onChange={handleChange} required /></div>
                     </div>
+
                     <div className='relative  flex-row justify-between'>
                         <div><label>Password</label></div>
                         <div><input className='text-cardamom' type="password" name="password" value={credentials.password} onChange={handleChange} required /></div>

@@ -24,11 +24,12 @@ export function getToken(){
 // getUser() -> returns token 
 export function getUser(){
     const token = getToken();
-    return token ? JSON.parse(window.atob(token.split('.')[1])).getUser : null
+    return token ? JSON.parse(window.atob(token.split('.')[1])).name : null
 }
 
 export async function login(credentials){
     const token = await usersAPI.login(credentials);
-    localStorage.setItem('token', token);
+    console.log(token)
+    localStorage.setItem('token', token.access);
     return getUser()
 }
