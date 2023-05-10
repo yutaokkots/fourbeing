@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'useraccounts',
-    'knox',
+    #'knox',
     'fourbeing',
     'rest_framework_simplejwt',
     'django.contrib.admin',
@@ -118,29 +118,29 @@ AUTH_PASSWORD_VALIDATORS = [
 
 ## rest_framework
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'knox.auth.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-        ),
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         #'knox.auth.TokenAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#         'rest_framework.authentication.TokenAuthentication',
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#         ),
+#     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
+# }
  
 ## rest_knox
 
 from datetime import timedelta
 from rest_framework.settings import api_settings
-REST_KNOX = {
-    'SECURE_HASH_ALGORITHM':'cryptography.hazmat.primitives.hashes.SHA512',
-    'AUTH_TOKEN_CHARACTER_LENGTH': 64,          # By default, it is set to 64 characters.
-    'TOKEN_TTL': timedelta(minutes=45),         # The default is 10 hours i.e., timedelta(hours=10)).
-    'USER_SERIALIZER': 'knox.serializers.UserSerializer',
-    'TOKEN_LIMIT_PER_USER': None,               # By default, this option is disabled and set to None; no limit
-    'AUTO_REFRESH': False,                      # Defines if the token expiry time is extended by TOKEN_TTL each time the token is used.
-    'EXPIRY_DATETIME_FORMAT': api_settings.DATETIME_FORMAT,
-}
+# REST_KNOX = {
+#     'SECURE_HASH_ALGORITHM':'cryptography.hazmat.primitives.hashes.SHA512',
+#     'AUTH_TOKEN_CHARACTER_LENGTH': 64,          # By default, it is set to 64 characters.
+#     'TOKEN_TTL': timedelta(minutes=45),         # The default is 10 hours i.e., timedelta(hours=10)).
+#     'USER_SERIALIZER': 'knox.serializers.UserSerializer',
+#     'TOKEN_LIMIT_PER_USER': None,               # By default, this option is disabled and set to None; no limit
+#     'AUTO_REFRESH': False,                      # Defines if the token expiry time is extended by TOKEN_TTL each time the token is used.
+#     'EXPIRY_DATETIME_FORMAT': api_settings.DATETIME_FORMAT,
+# }
 
 #simple jwt
 

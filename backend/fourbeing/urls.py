@@ -1,22 +1,22 @@
 from django.urls import path
 from . import views
-from knox import views as knox_views
+
+#from knox import views as knox_views
 #from fourbeing.views import LoginView, CreateUserView, ManageUserView, LoginAPI
 
 
 urlpatterns = [
-    # path('api/auth/createuser/', CreateUserView.as_view(), name="createuser"),
-    # path('api/auth/profile/', ManageUserView.as_view(), name='profile'),
-    # path('api/auth/login/', LoginAPI.as_view(), name='knox_login'),
-    # path('api/auth/logout/', knox_views.LogoutView.as_view(), name='knox_logout'),
-    # path('api/auth/logoutall/', knox_views.LogoutAllView.as_view(), name='knox_logoutall'),
-    
-    # api/e/fourbeing/
-
-    path('fourbeing/test/', views.test, name='test'),
-    # api/e/fourbeing/
+    # api/fourbeing/
     path('fourbeing/', views.fourbeing_index, name="fourbeing_index" ),
-    # api/e/fourbeing/create/
+
+    # api/fourbeing/create/
     path('fourbeing/create/', views.createpost, name="createpost" ),
+    # api/fourbeing/:id/
+    path('fourbeing/<int:post_id>/', views.post_detail, name='post_detail'),
+    path('fourbeing/<int:post_id>/update/', views.post_update, name='post_detail'),
+    path('fourbeing/<int:post_id>/delete/', views.post_delete, name='post_detail'),
+
+    # api/fourbeing/
+    path('fourbeing/test/', views.test, name='test'),
 
 ]

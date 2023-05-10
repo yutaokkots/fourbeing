@@ -3,13 +3,13 @@ from rest_framework.response import Response
 from rest_framework.request import Request
 
 from rest_framework.serializers import DateTimeField
-from knox.models import AuthToken
+#from knox.models import AuthToken
 from useraccounts.serializers import UserSerializer, LoginSerializer, CreateUserSerializer
 
 from django.utils import timezone
-from knox.auth import TokenAuthentication
-from knox.settings import knox_settings, CONSTANTS
-from knox.views import LoginView as KnoxLoginView
+#from knox.auth import TokenAuthentication
+#from knox.settings import knox_settings, CONSTANTS
+#from knox.views import LoginView as KnoxLoginView
 from rest_framework import status
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from fourbeing.models import User
@@ -51,7 +51,7 @@ class RegisterAPI(generics.GenericAPIView):
 class LoginAPI(generics.GenericAPIView):
     serializer_class = LoginSerializer
     permission_classes = (permissions.AllowAny,)
-   
+
     # def get_post_response_data(self, request, token, instance):
     # #     UserSerializer = self.get_user_serializer_class()
 
@@ -67,12 +67,12 @@ class LoginAPI(generics.GenericAPIView):
         #user = authenticate(username=username, password=password)
 
         print(f'this is the user {user}')
-        token = AuthToken.objects.create(user)
+        #token = AuthToken.objects.create(user)
         #datetime_format = token.get_expiry_datetime_format()
         #print(datetime_format)
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
-            "token": AuthToken.objects.create(user)[1],
+            #"token": AuthToken.objects.create(user)[1],
             #"exp": AuthToken.objects.create(expiry)[1],
         })
 
@@ -171,7 +171,7 @@ class LoginAPI(generics.GenericAPIView):
 # Get User API
 
 class UserAPI(generics.RetrieveAPIView):
-    authentication_classes = (TokenAuthentication,)
+    authentication_classes = ()
     permission_classes = [
         permissions.IsAuthenticated,
     ]

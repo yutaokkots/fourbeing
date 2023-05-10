@@ -1,22 +1,38 @@
 from rest_framework import serializers
-from fourbeing.models import Test
+from fourbeing.models import Test, Post
 
 # serializer for create_user request
 from django.contrib.auth.models import User
-from fourbeing.models import Post
+
 from django.contrib.auth import authenticate, get_user_model
 
 from rest_framework.validators import UniqueValidator
 
 from rest_framework.response import Response
-from knox.auth import AuthToken
+# from knox.auth import AuthToken
 
 
 class PostSerializer(serializers.Serializer):
-    class Meta:
-        model = Post
-        fields = ('id','title', 'description', 'created')
+    # id = serializers.IntegerField()
+    # username = serializers.CharField()
+    # description = serializers.CharField()
+    # created = serializers.DateTimeField()
+    model = Post
+    fields = ('id','title', 'description', 'created')
+    # class Meta:
+    #     model = Post
+    #     fields = ('id','title', 'description', 'created')
+    #     extra_kwargs = {
+    #         'title': {'required': True},
+    #         'description': {'required': True},
+    #     }
 
+    def create(self, validated_data):
+        post = Post.objects.create(
+            title=validated_data['title'],
+            description=validated_data['description'],
+        )
+        return post
 
 class TestSerializer(serializers.ModelSerializer):
     class Meta:
