@@ -1,0 +1,6 @@
+1) create user authentication and connecting user with profile in 1:1 relationship
+    - how to connect user relationship with profile model?
+    - route protection for backend, and sql injections?
+
+2) 
+

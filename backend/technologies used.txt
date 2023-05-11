@@ -1,0 +1,7 @@
+vite
+
+
+
+django-rest-framework
+django-cors-headers
+psycopg2-binary
