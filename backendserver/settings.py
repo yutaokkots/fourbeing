@@ -73,7 +73,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
     'https://fourbeing.herokuapp.com',
-    'https://fourbeing.vercel.app'
+    'https://fourbeing.vercel.app',
+    'https://main--melodic-pothos-21eb66.netlify.app'
 ]
 
 ROOT_URLCONF = 'backendserver.urls'
