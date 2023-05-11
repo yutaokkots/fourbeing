@@ -72,6 +72,8 @@ CORS_ALLOWED_ORIGINS = [
     'https://localhost:5173',
     'http://localhost:5173',
     'http://127.0.0.1:5173',
+    'https://fourbeing.herokuapp.com',
+    'https://fourbeing.vercel.app'
 ]
 
 ROOT_URLCONF = 'backendserver.urls'
@@ -98,23 +100,23 @@ WSGI_APPLICATION = 'backendserver.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'fourbeing',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ['DB_NAME'],
-        'USER': os.environ['DB_USER'],
-        'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': 'db.bit.io',
-        'PORT': '5432',
+        'NAME': 'fourbeing',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ['DB_NAME'],
+#         'USER': os.environ['DB_USER'],
+#         'PASSWORD': os.environ['DB_PASSWORD'],
+#         'HOST': 'db.bit.io',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
