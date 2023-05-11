@@ -13,10 +13,10 @@ from rest_framework.response import Response
 
 
 class PostSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
-    title = serializers.CharField()
-    description = serializers.CharField()
-    created = serializers.DateTimeField()
+    # id = serializers.IntegerField()
+    # title = serializers.CharField()
+    # description = serializers.CharField()
+    # created = serializers.DateTimeField()
 
     class Meta:
         model = Post

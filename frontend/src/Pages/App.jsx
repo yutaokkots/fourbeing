@@ -2,30 +2,58 @@
 import { Routes, Route } from 'react-router-dom'
 import Dashboard from './Dashboard/Dashboard'
 
-import { useReducer, useState, useContext } from 'react'
+import { useReducer, useState, createContext } from 'react'
 import AuthPage from './AuthPage/AuthPage'
+import Profile from './Profile/Profile'
 
 import './App.css'
 import * as usersAPI from '../utilities/users-service'
 
 
-export const AuthContext = React.createContext()
 
+export const AuthContext = createContext()
+
+const initialState = {
+    isAuthenticated: false,
+    user: null
+}
+
+const reducer = (state, action) => {
+    // switches between the two states, login and logout
+    switch (action.type) {
+        case "LOGIN":
+            return {
+                ...state,
+                isAuthenticated: true,
+                user: action.payload.user,
+            };
+        case "LOGOUT":
+            return {
+            ...state,
+            isAuthenticated: false,
+            user: null
+            };
+        default:
+            return state;
+    }
+  };
 
 
 export default function App() {
-    const [state, dispatch] = useReducer(reducer, {login: true})
+    const [state, dispatch] = useReducer(reducer, initialState)
     const [user, setUser] = useState(usersAPI.getUser)
 
 
     return (
         <>
-
-            <Routes>
-                <Route path='/' element={<Dashboard user={ user }/>} />
-                <Route path='/login' element={<AuthPage user={ user } setUser={ setUser}/>} />
-            </Routes>
-
+            <AuthContext.Provider value={{state, dispatch}}>
+                <Routes>
+                        <Route path='/' element={<Dashboard user={ user }/>} />
+                        <Route path='/login' element={<AuthPage user={ user } setUser={ setUser}/>} />
+                        <Route path='/profile' element={<Profile user={ user } setUser={ setUser}/>} />
+                    
+                </Routes>
+            </AuthContext.Provider>
         </>
     )
 }

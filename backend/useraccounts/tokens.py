@@ -16,7 +16,7 @@ def create_jwt_pair_for_user(user:User):
 
     return tokens
 
-## create a custom token that includse userinfo
+## create a custom token that includes userinfo
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
@@ -28,3 +28,4 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+

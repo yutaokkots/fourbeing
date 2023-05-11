@@ -19,17 +19,17 @@ posts = [
 # api/e/fourbeing/
 @api_view(http_method_names=["GET"])
 def fourbeing_index(request):
-    serializer_class = PostSerializer
+    
     all_posts = Post.objects.all()
     if request.method == "GET":
-        serializer = PostSerializer(instance=all_posts, many=True)
-        print(serializer)
+        serializer = PostSerializer(instance=all_posts, many=True, partial=True )
+
         print(serializer.data)
-        response = {
-            "message": "posts",
+        response = { 
+            "message": "posts", 
             "data": serializer.data,
         }
-        return Response(data=response.data, status=status.HTTP_200_OK)
+        return Response(data=response, status=status.HTTP_200_OK)
 
 
 
@@ -40,9 +40,9 @@ def createpost(request):
     if request.method == "POST":
         data = request.data
         serializer = PostSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
         if serializer.is_valid():
             try:
-                serializer.is_valid(raise_exception=True)
                 serializer.save()
                 response = {
                     "message": "Post created",
@@ -52,7 +52,6 @@ def createpost(request):
             except Exception as exception:
                 return Response(data=exception.args, status=status.HTTP_400_BAD_REQUEST)
             
-
 
 @api_view(http_method_names=["GET", "POST"])
 def homepage(request):

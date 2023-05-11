@@ -8,7 +8,7 @@ from django.utils import timezone
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     username = models.CharField(max_length=20)
     profile = models.CharField(max_length=100)
     

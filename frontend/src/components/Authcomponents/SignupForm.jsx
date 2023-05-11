@@ -1,17 +1,18 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, } from 'react'
 import * as userService from '../../utilities/users-service'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate  } from 'react-router-dom'
 const initialState = {
     username: '',
     email: '',
     password:'',
-    password2:''
+    passwordConfirm:''
 
 }
 
 export default function LoginForm({ user, setuser }) {
     const [credentials, setCredentials] = useState(initialState);
+    const navigate = useNavigate()
     const [error, setError] = useState('');
 
     const disable = false;
@@ -19,7 +20,6 @@ export default function LoginForm({ user, setuser }) {
     function handleChange(evt){
         setCredentials({...credentials, [evt.target.name]:evt.target.value})
     }
-
     // handlesubmit() -> invokes signUp() function 
     async function handleSubmit(evt){
         evt.preventDefault();
@@ -30,10 +30,10 @@ export default function LoginForm({ user, setuser }) {
             const newUser = await userService.signUp(credentials)
             console.log(newUser)
             setuser(newUser)
+            navigate('/profile')
         } catch(error){
             setError('Signup Failed - Try Again');
         }
-
     }
 
     return (
@@ -72,12 +72,12 @@ export default function LoginForm({ user, setuser }) {
                         <label>confirm password</label>
                         <input 
                             type="password" 
-                            name="password2" 
-                            value={credentials.password2}
+                            name="passwordConfirm" 
+                            value={credentials.passwordConfirm}
                             onChange={handleChange}
                             required></input>
                     </div>
-                    <button className=' text-cardamom bg-vanilla hover:bg-land hover:text-vanilla py-1 px-1 rounded mt-5 mb-5' 
+                    <button className=' text-cardamom bg-moonlight hover:bg-land hover:text-vanilla py-1 px-1 rounded mt-5 mb-5' 
                         type="submit" 
                         
                         >SIGN UP</button>
@@ -87,3 +87,9 @@ export default function LoginForm({ user, setuser }) {
         </>
     )
 }
+
+// 'midnight': '#091123',
+// 'afterhour':'#212A3E',
+// 'moonlight':'#F1F6F9',
+// 'regal': '#34172D',
+// 'lining':'#d678a4',

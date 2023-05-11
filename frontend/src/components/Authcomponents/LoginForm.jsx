@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import * as userService from '../../utilities/users-service'
+import { AuthContext } from "../../Pages/App"
 
 const initialState = {
     username: '',
@@ -7,6 +8,7 @@ const initialState = {
 }
 
 export default function LoginForm({ user, setUser }) {
+    const { dispatch } = useContext(AuthContext);
     const [credentials, setCredentials] = useState(initialState);
     const [error, setError] = useState('');
     
@@ -18,13 +20,20 @@ export default function LoginForm({ user, setUser }) {
     async function handleSubmit(evt) {
         evt.preventDefault();
         try {
-          const user = await userService.login(credentials);
-          console.log(user)
-          setUser(user);
+            const user = await userService.login(credentials);
+            console.log(user)
+            dispatch({
+                type: "Login",
+                payload: user
+            })
+            setUser(user);
         } catch {
-          setError('Log In Failed - Try Again');
+            setError('Log In Failed - Try Again');
         }
     }
+
+  
+
 
     return (
         <>
@@ -48,3 +57,6 @@ export default function LoginForm({ user, setUser }) {
         </>
     )
 }
+
+
+

@@ -34,14 +34,26 @@ class UsernameSerializer(serializers.ModelSerializer):
 #         extra_kwargs = {'password': {'write_only': True, 'min_length':4}}
 
 class CreateUserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, required=True, style={"input_type": "password"})
+    passwordConfirm = serializers.CharField(write_only=True, required=True, style={"input_type": "password"})
+    
     class Meta:
         model = User
-        fields = ('id','username', 'email', 'password')
+        fields = ('id','username', 'email', 'password', 'passwordConfirm')
         extra_kwargs = {'password':{'write_only': True, 'min_length':4}}
 
+    def validate(self, attrs):
+        if attrs['password'] != attrs['passwordConfirm']:
+            raise serializers.ValidationError("Passwords do not match")
+        return attrs
+
     def create(self, validated_data):
-        user = User.objects.create_user(validated_data['username'],validated_data['email'], validated_data['password'], )
-        return user
+        user = User.objects.create_user(
+            validated_data['username'],
+            validated_data['email'], 
+            validated_data['password'], )
+        
+        return user 
 
 # class CreateUserSerializer(generics.CreateAPIView):
 #     serializer_class = UserSerializer

@@ -1,6 +1,6 @@
 from django.urls import path, include
 # from knox import views as knox_views
-from useraccounts.api import LoginAPI, RegisterAPI, UserAPI #, ManageUserView
+from useraccounts.api import LoginAPI, RegisterAPI, UserAPI  # BaseUserCreationForm #, ManageUserView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -10,7 +10,9 @@ from useraccounts.tokens import MyTokenObtainPairView
 
 urlpatterns = [
 
+    #path('createuser/', BaseUserCreationForm.as_view(), name="createuser"),
     path('createuser/', RegisterAPI.as_view(), name="createuser"),
+
     #path('signin/', LoginAPI.as_view(), name='login'),
     path('user/', UserAPI.as_view(), name='user'),
     # path('logout/', knox_views.LogoutView.as_view(), name='knox_logout'),
