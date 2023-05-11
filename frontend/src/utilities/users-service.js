@@ -56,6 +56,7 @@ export function getToken(){
         localStorage.removeItem('Token');
         return null;
     }
+
     return token;
 }
 

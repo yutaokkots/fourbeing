@@ -2,13 +2,12 @@
 import { Routes, Route } from 'react-router-dom'
 import Dashboard from './Dashboard/Dashboard'
 
-import { useReducer, useState, createContext } from 'react'
+import { useReducer, useState, createContext, useEffect } from 'react'
 import AuthPage from './AuthPage/AuthPage'
 import Profile from './Profile/Profile'
 
 import './App.css'
 import * as usersAPI from '../utilities/users-service'
-
 
 
 export const AuthContext = createContext()
@@ -40,13 +39,20 @@ const reducer = (state, action) => {
 
 
 export default function App() {
-    const [state, dispatch] = useReducer(reducer, initialState)
+    const [userState, dispatch] = useReducer(reducer, initialState)
     const [user, setUser] = useState(usersAPI.getUser)
+
+    useEffect(()=>{
+        setUser(usersAPI.getUser)
+    }, [])
+    function updateUser(userState){
+        setUser(userState)
+      }
 
 
     return (
         <>
-            <AuthContext.Provider value={{state, dispatch}}>
+            <AuthContext.Provider value={{user, setUser}}>
                 <Routes>
                         <Route path='/' element={<Dashboard user={ user }/>} />
                         <Route path='/login' element={<AuthPage user={ user } setUser={ setUser}/>} />

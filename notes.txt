@@ -1,27 +1,52 @@
+Resources used:
+docs
+https://v2.tailwindcss.com/docs
+https://tailwindcss.com/docs/customizing-colors
+https://tailwindcss.com/docs/grid-column
+
+
+
+react-django
 https://m.youtube.com/watch?v=ntgKH7KUaNM
 https://github.com/markerikson/react-redux-links
 https://www.richardtwatson.com/open/Reader/_book/one-to-one-and-recursive-relationships.html
 https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react
+https://stackoverflow.com/questions/68113416/better-way-to-save-data-in-database-using-django-serializer
 
 Django authentication notes
+https://www.django-rest-framework.org/api-guide/authentication/
+https://docs.djangoproject.com/en/4.2/topics/auth/default/
 https://blog.devgenius.io/django-rest-knox-token-authentication-f134760a4a7b
 https://james1345.github.io/django-rest-knox/
-https://github.com/James1345/django-rest-knox
-https://www.django-rest-framework.org/api-guide/authentication/
 https://james1345.github.io/django-rest-knox/installation/
-https://blog.devgenius.io/django-rest-knox-token-authentication-f134760a4a7b
+https://github.com/James1345/django-rest-knox
+
 https://www.youtube.com/watch?app=desktop&v=0d7cIfiydAc
 https://stackoverflow.com/questions/48943331/django-restframework-extra-kwargs-not-working
-
 
 https://medium.com/technest/implement-user-auth-in-a-django-react-app-with-knox-fc56cdc9211c
 https://github.com/kjmczk/DjangoReactTodo
 
+https://www.youtube.com/watch?v=p63ykt2lTQ0&list=PLEt8Tae2spYlosWRH9JDpKNxzb3bSOJGx&index=10
+
 https://soshace.com/react-user-login-authentication-using-usecontext-and-usereducer/
+
+Django-rest-framework HTTP http_method_names
+https://www.django-rest-framework.org/tutorial/2-requests-and-responses/
+
+Django put method
+https://studygyaan.com/django/put-method-in-django-rest-framework
+
+One-to-one 1:1 models
+https://www.crunchydata.com/blog/extending-djangos-user-model-with-onetoonefield
+
+serializers
+https://www.django-rest-framework.org/api-guide/serializers/
+https://www.geeksforgeeks.org/modelserializer-in-serializers-django-rest-framework/amp/
 
 Django-rest_framework-knox
 https://www.youtube.com/watch?v=s3jTweZiqfI
-https://www.youtube.com/watch?v=0d7cIfiydAc ###
+https://www.youtube.com/watch?v=0d7cIfiydAc 
 
 declaring prop types in eslint
 https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md
@@ -37,6 +62,18 @@ https://testdriven.io/blog/django-spa-auth/
 jwt
 https://github.com/jod35/Building-APIS-with-DRF/blob/main/posts/apps.py
 https://www.youtube.com/watch?v=mm6vlnWXFdM&list=PLEt8Tae2spYlosWRH9JDpKNxzb3bSOJGx&index=8
+https://django-rest-framework-simplejwt.readthedocs.io/en/latest/customizing_token_claims.html
+https://stackoverflow.com/questions/54544978/customizing-jwt-response-from-django-rest-framework-simplejwt
+
+tailwind:
+https://tailwindcss.com/docs/grid-column
+
+react:
+https://bobbyhadz.com/blog/react-redirect-after-form-submit
+
+dispatch/usereducer
+https://www.freecodecamp.org/news/state-management-with-react-hooks/
+
 
 backend:
 

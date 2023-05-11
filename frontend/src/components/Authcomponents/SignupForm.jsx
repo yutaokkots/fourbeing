@@ -1,7 +1,10 @@
 import React from 'react'
-import { useState, } from 'react'
+import { useState, useContext } from 'react'
 import * as userService from '../../utilities/users-service'
 import { Link, useNavigate  } from 'react-router-dom'
+import { AuthContext } from "../../Pages/App"
+import * as usersAPI from '../../utilities/users-api'
+
 const initialState = {
     username: '',
     email: '',
@@ -10,9 +13,11 @@ const initialState = {
 
 }
 
-export default function LoginForm({ user, setuser }) {
+export default function LoginForm() {
     const [credentials, setCredentials] = useState(initialState);
     const navigate = useNavigate()
+    const { user, setUser } = useContext(AuthContext)
+
     const [error, setError] = useState('');
 
     const disable = false;
@@ -24,16 +29,16 @@ export default function LoginForm({ user, setuser }) {
     async function handleSubmit(evt){
         evt.preventDefault();
         console.log("submitted")
-        try {
-            console.log("handleSubmit")
-            console.log(credentials)
-            const newUser = await userService.signUp(credentials)
-            console.log(newUser)
-            setuser(newUser)
-            navigate('/profile')
-        } catch(error){
-            setError('Signup Failed - Try Again');
-        }
+        await userService.signUp(credentials).then((response) => {
+            console.log(response)
+            
+        }).then((response) => {
+            setUser(response)
+        }).catch((error) => {
+            setError('Signup Failed - Try Again', error);
+        })
+        setUser(usersAPI.getUser)
+        navigate("/")
     }
 
     return (

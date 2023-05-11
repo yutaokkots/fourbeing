@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext} from 'react'
+import { useNavigate } from 'react-router-dom'
 import * as userService from '../../utilities/users-service'
 import { AuthContext } from "../../Pages/App"
 
@@ -7,29 +8,26 @@ const initialState = {
     password: ''
 }
 
-export default function LoginForm({ user, setUser }) {
-    const { dispatch } = useContext(AuthContext);
+export default function LoginForm() {
+    const { user, setUser } = useContext(AuthContext)
     const [credentials, setCredentials] = useState(initialState);
     const [error, setError] = useState('');
+    const navigate = useNavigate()
     
     function handleChange(evt) {
         setCredentials({ ...credentials, [evt.target.name]: evt.target.value });
         setError('');
-      }
+        }
     
     async function handleSubmit(evt) {
         evt.preventDefault();
         try {
-            const user = await userService.login(credentials);
-            console.log(user)
-            dispatch({
-                type: "Login",
-                payload: user
-            })
-            setUser(user);
+            const userInfo = await userService.login(credentials);
+            setUser(userInfo);
         } catch {
             setError('Log In Failed - Try Again');
         }
+        navigate("/")
     }
 
   

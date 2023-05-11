@@ -1,15 +1,23 @@
-import ( useContext ) from 'react'
+import { useContext } from 'react'
 import { AuthContext } from "../../Pages/App"
+import * as userService from "../../utilities/users-service"
 
 export default function Navbar() {
-    const 
-    let links = [
-        {name: 'Home', link: '/'},
-        {name: 'About', link: '/about'},
-        {name: 'Profile', link: '/profile'},
-        {name: 'Login', link: '/login'},
-        {name: 'Logout', link: '/logout'},
-    ]
+    const { user, setUser } = useContext(AuthContext)
+
+    // let links = [
+    //     {name: 'Home', link: '/'},
+    //     {name: 'About', link: '/about'},
+    //     {name: 'Profile', link: '/profile'},
+    //     {name: 'Login', link: '/login'},
+    //     {name: 'Logout', link: '/logout'},
+    // ]
+
+    function logOut(){
+        userService.logOut()
+        setUser(null)
+    }
+
     return (
         <>
             <div className="nav shadow-lg w-full fixed top-0 left-0">
@@ -25,20 +33,28 @@ export default function Navbar() {
                         )}  */}
                         <li className="md:ml-8 text-xl">
                             <a className="text-gray-800 hover:text-gray-400 duration-300" 
-                                    href='/'>Home</a>
+                                href='/'>Home</a>
+                        </li>
+                        
+                        <li className="md:ml-8 text-xl">
+                            <a className="text-gray-800 hover:text-gray-400 duration-300" 
+                                href='/profile'>Profile</a>
+                        </li>
+                        { user &&
+                        <li className="md:ml-8 text-xl">
+                            <a className="text-gray-800 hover:text-gray-400 duration-300" 
+                                href='/profile'>hello, {user}</a>
+                        </li>
+                        }   
+                        <li className="md:ml-8 text-xl">
+                            <a className="text-gray-800 hover:text-gray-400 duration-300" 
+                                href='/login'>Login</a>
                         </li>
                         <li className="md:ml-8 text-xl">
                             <a className="text-gray-800 hover:text-gray-400 duration-300" 
-                                    href='/profile'>Profile</a>
-                        </li>
-                        {}
-                        <li className="md:ml-8 text-xl">
-                            <a className="text-gray-800 hover:text-gray-400 duration-300" 
-                                    href='/login'>Login</a>
-                        </li>
-                        <li className="md:ml-8 text-xl">
-                            <a className="text-gray-800 hover:text-gray-400 duration-300" 
-                                    href='/logout'>Logout</a>
+                                href='/'
+                                onClick={ logOut }
+                                >Logout</a>
                         </li>
                     </ul>
                     </div>

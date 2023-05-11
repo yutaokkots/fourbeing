@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import * as postsAPI from '../../utilities/posts_api'
 import Navbar from '../../components/Navbar/Navbar'
 import Postcard from '../../components/Postcard/Postcard'
+import { AuthContext } from '../App'
 
-export default function Dashboard({ user }) {
+export default function Dashboard() {
     const [allPosts, setAllPosts] = useState([""])
+    const { user, setUser } = useContext(AuthContext)
 
     useEffect(() => {
         async function getPosts(){
@@ -21,8 +23,9 @@ export default function Dashboard({ user }) {
             catch(err){
                 console.log('err', err)
             }
-        }
+            }
         getPosts()
+        console.log(user)
     }, [])
 
     return (
