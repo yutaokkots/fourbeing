@@ -11,9 +11,8 @@ from useraccounts.models import Profile
 class Post(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=2000)
-    #profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     created=models.DateTimeField(auto_now_add=True)
-
     def __str__ (self):
         return f"New post: called '{self.title}'"
     

@@ -11,7 +11,7 @@ router = routers.DefaultRouter()
 urlpatterns = [
     # api/fourbeing/
 
-    path('fourbeing/', views.fourbeing_index, name="fourbeing_index" ),
+    path('fourbeing/', views.index, name="index" ),
     # api/fourbeing/create/
     path('fourbeing/create/', views.createpost, name="createpost" ),
     # api/fourbeing/:id/

@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from fourbeing.models import Post
+from django.contrib.auth.models import User
 
 posts = [
     {
@@ -18,7 +19,7 @@ posts = [
 # gets all of the posts in the fourbeing page
 # api/e/fourbeing/
 @api_view(http_method_names=["GET"])
-def fourbeing_index(request):
+def index(request):
     
     all_posts = Post.objects.all()
     if request.method == "GET":
@@ -31,6 +32,11 @@ def fourbeing_index(request):
         }
         return Response(data=response, status=status.HTTP_200_OK)
 
+# @api_view(http_method_names=["GET"])
+# def post_detail(request, post_id):
+#     print("hello")
+#     print(post_id)
+#     singlePost = Post.objects.filter(id=request.params)
 
 
 # allows the creation of new posts
@@ -39,6 +45,7 @@ def fourbeing_index(request):
 def createpost(request):
     data = request.data
     serializer = PostSerializer(data=data)
+    print(serializer)
     serializer.is_valid(raise_exception=True)
     if serializer.is_valid():
         try:
@@ -62,12 +69,18 @@ def homepage(request):
     response = {"message": "Hello World"}
     return Response(data=response, status=status.HTTP_200_OK)
 
-# allows the retrieval of a single post
+# allows the retrieval of a single post, returns the profile name as well
 # api/e/fourbeing/<post_id>/
-@api_view(http_method_names=["POST"])
+@api_view(http_method_names=["GET"])
 def post_detail(request, post_id: int):
     post = get_object_or_404(Post, pk=post_id)
     serializer = PostSerializer(instance=post)
+    profile_id = serializer.data["profile"]
+    user = User.objects.get(id=profile_id)
+    serializer.data["user"] = user
+    print(user)
+    #print(serializer.data)
+    print(serializer.data["profile"])
     response = {
         "message":"post",
         "data":serializer.data

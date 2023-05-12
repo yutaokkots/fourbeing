@@ -13,14 +13,9 @@ from rest_framework.response import Response
 
 
 class PostSerializer(serializers.ModelSerializer):
-    # id = serializers.IntegerField()
-    # title = serializers.CharField()
-    # description = serializers.CharField()
-    # created = serializers.DateTimeField()
-
     class Meta:
         model = Post
-        fields = ['id','title', 'description', 'created']
+        fields = ['id','title', 'description', 'created', 'profile']
         # extra_kwargs = {
         #     'title': {'required': True},
         #     'description': {'required': True},
