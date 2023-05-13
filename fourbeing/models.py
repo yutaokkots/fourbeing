@@ -22,7 +22,8 @@ class Reply(models.Model):
     love = models.IntegerField(null=True, blank=True)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-
+    created=models.DateTimeField(auto_now_add=True)
+    
 class Photo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     url = models.CharField(max_length=200)

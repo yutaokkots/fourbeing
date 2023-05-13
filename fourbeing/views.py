@@ -127,3 +127,30 @@ def reply_create(request):
             return Response(data=response, status=status.HTTP_201_CREATED)
         except Exception as exception:
             return Response(data=exception.args, status=status.HTTP_400_BAD_REQUEST)
+
+# allows the update and deletion of replies
+# api/fourbeing/<post_id>/comments/<reply_id>/reply_create/ 
+@api_view(http_method_names=["PUT", "DELETE"])            
+def reply_update(request, post_id: int):
+    post = get_object_or_404(Post, id=post_id)
+    data = request.data
+    if request.method == "PUT":
+        serializer = PostSerializer(instance=post, data=data, partial=True)
+        print(serializer)
+        print(serializer.is_valid)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if request.method == "DELETE":
+        post.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+        
+def post_delete(request, post_id: int):
+    # post = get_object_or_404(Post, pk=post_id)
+
+    # if post:
+    #     return Response(data=post, status=status.HTTP_200_OK)
+    
+    # return Response(data={"error": "Post not found"}, status=status.HTTP_200_OK)
+    pass
