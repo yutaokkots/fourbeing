@@ -10,9 +10,10 @@ from rest_framework.validators import UniqueValidator
 
 from rest_framework.response import Response
 # from knox.auth import AuthToken
-
+from django.shortcuts import get_object_or_404
 
 class PostSerializer(serializers.ModelSerializer):
+    replies = serializers.RelatedField(many=True, read_only=True) # related field to Reply model
     class Meta:
         model = Post
         fields = ['id','title', 'description', 'created', 'profile', "username"]
@@ -56,7 +57,6 @@ class AuthSerializer(serializers.Serializer):
     def validate(self, attrs):
         username = attrs.get('username')
         password = attrs.get('password')
-
         user =  authenticate(
             request = self.context.get('request'),
             username=username,
@@ -69,7 +69,37 @@ class AuthSerializer(serializers.Serializer):
         attrs['user'] = user
         return 
 
-class ReplySerializer(serializers.Serializer):
+class ReplySerializer(serializers.ModelSerializer):
+    comment = serializers.CharField()
+    username = serializers.CharField()
+
+    # user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
+    # post = serializers.PrimaryKeyRelatedField(queryset=Post.objects.all(), many=True)
     class Meta:
         model = Reply
-        fields = ['comment', 'love', 'profile', 'post']
+        fields = ['comment', 'username', 'user', 'post', 'created', 'love']
+    
+    # def validate_post(self, value):
+    #     post_id = value
+    #     post = get_object_or_404(Post, id=post_id)
+    #     return post
+    #     # if not isinstance(value, Post):
+    #     #     raise serializers.ValidationError("Invalid Post")
+    #     # return value
+
+    # def create(self, validated_data):
+    #     reply = Reply.objects.create(**validated_data)
+    #     return reply
+    
+
+    
+    # def create(self, validated_data):
+    #     reply = Reply.objects.create(
+    #         post = validated_data['post'],
+    #         username = validated_data['username'],
+    #         user = validated_data['user'],
+    #         comment = validated_data['comment']
+    #     )
+    #     reply.save()
+     #   return reply
+    

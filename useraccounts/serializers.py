@@ -44,46 +44,6 @@ class LoginSerializer(serializers.Serializer):
             return user
         raise serializers.ValidationError("Credentials are incorrect")
  
-# class ProfileSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Profile
-#         fields = ['title', 'bio', 'location', 'website']
-#     def create(self, validated_data):
-#         print(validated_data)
-#         user = validated_data.user
-#         profile = Profile.objects.create(user=user, **validated_data)
-#         return profile
-    
-    # def create(self, validated_data):
-    #     user_data = validated_data.pop('user')
-    #     user = UserSerializer.create(UserSerializer(), validated_data=user_data)
-    #     student, created = Profile.objects.update_or_create(user=user,
-    #         title=validated_data.pop('title'),
-    #         bio=validated_data.pop('bio'),
-    #         location=validated_data.pop('location'),
-    #         website=validated_data.pop('website')
-    #         )
-    #     return student
-
-# class ProfileSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Profile
-#         fields = ['user','title', 'bio', 'location', 'website']
-
-#     def create(self, validated_data):
-#         #user_id = validated_data.pop('user')
-#         print(validated_data)
-#         user = User.objects.get(username=validated_data['user'])
-#         profile = Profile.objects.create(
-#             user=user
-#             validated_data['title'], 
-#             validated_data['bio'],
-#             validated_data['location'],
-#             validated_data['website'],
-#             )
-#         return profile
-    
-
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:

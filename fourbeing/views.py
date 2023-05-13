@@ -1,4 +1,5 @@
 from fourbeing.models import Test
+
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from fourbeing.serializers import TestSerializer, PostSerializer, ReplySerializer, AuthSerializer #from 'serializers.py' file
@@ -35,10 +36,12 @@ def createpost(request):
     #print(serializer.data)
     if serializer.is_valid():
         try:
-            serializer.save()
+            reply = serializer.save()
+            response_data = ReplySerializer(reply).data
+            
             response = {
                 "message": "Post created",
-                "data": serializer.data
+                "data": response_data
             }
             return Response(data=response, status=status.HTTP_201_CREATED)
         except Exception as exception:
@@ -67,8 +70,6 @@ def post_update(request, post_id: int):
     data = request.data
     if request.method == "PUT":
         serializer = PostSerializer(instance=post, data=data, partial=True)
-        print(serializer)
-        print(serializer.is_valid)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -109,17 +110,21 @@ def reply_index(request):
 # allows the creation of new replies
 # api/fourbeing/<post_id>/comments/<reply_id>/reply_create/
 @api_view(http_method_names=["POST"])
-def reply_create(request):
+def reply_create(request, post_id:int):
     data = request.data
-    username = (data["username"])
-    user = User.objects.get(username = username)
-    data["profile"] = user.id
-    serializer = PostSerializer(data=data)
+    print(data["post"])
+    # post = Post.objects.get(id=post_id)
+    # print(post)
+    # data["post"] = post.id
+    serializer = ReplySerializer(data=data)
+    
     serializer.is_valid(raise_exception=True)
-    #print(serializer.data)
+    print(serializer.errors)
     if serializer.is_valid():
         try:
-            serializer.save()
+            #print(serializer.validate_post(data["post"]))
+            serializer.save() 
+            
             response = {
                 "message": "Post created",
                 "data": serializer.data
@@ -129,9 +134,10 @@ def reply_create(request):
             return Response(data=exception.args, status=status.HTTP_400_BAD_REQUEST)
 
 # allows the update and deletion of replies
-# api/fourbeing/<post_id>/comments/<reply_id>/reply_create/ 
+# /api/fourbeing/<post_id>/comments/create/
+# api/fourbeing/<post_id>/comments/<reply_id>/create/ 
 @api_view(http_method_names=["PUT", "DELETE"])            
-def reply_update(request, post_id: int):
+def reply_update(request, post_id:int):
     post = get_object_or_404(Post, id=post_id)
     data = request.data
     if request.method == "PUT":
@@ -140,6 +146,7 @@ def reply_update(request, post_id: int):
         print(serializer.is_valid)
         if serializer.is_valid():
             serializer.save()
+            print(serializer.data)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     if request.method == "DELETE":
@@ -154,3 +161,9 @@ def post_delete(request, post_id: int):
     
     # return Response(data={"error": "Post not found"}, status=status.HTTP_200_OK)
     pass
+
+
+@api_view(http_method_names=["PUT"])
+def reply_like(request, reply_id:int):
+    reply = Reply.objects.get(pk=reply_id)
+    reply.increment_love()

@@ -17,7 +17,8 @@ urlpatterns = [
     path('fourbeing/<int:post_id>/delete/', views.post_update, name='post_delete'),
 
     path('fourbeing/<int:post_id>/comments/', views.reply_index, name='reply_detail'),
-    path('fourbeing/<int:post_id>/comments/<int:reply_id>/create/', views.reply_create, name='reply_create'),
+    path('fourbeing/<int:post_id>/comments/create/', views.reply_create, name='reply_create'),
+    #path('fourbeing/<int:post_id>/comments/<int:reply_id>/create/', views.reply_create, name='reply_create'),
     path('fourbeing/<int:post_id>/comments/<int:reply_id>/update/', views.reply_update, name='reply_update'),
     path('fourbeing/<int:post_id>/comments/<int:reply_id>/delete/', views.reply_update, name='reply_delete'),
     
