@@ -13,6 +13,7 @@ class Post(models.Model):
     description = models.CharField(max_length=2000)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     created=models.DateTimeField(auto_now_add=True)
+    username = models.CharField(max_length=50)
     def __str__ (self):
         return f"New post: called '{self.title}'"
     

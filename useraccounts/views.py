@@ -23,28 +23,6 @@ def getProfile(request, user_id):
         }
         return Response(data=response, status=status.HTTP_200_OK)
 
-# @api_view(http_method_names=["POST"])
-# def createProfile(request, user_id):
-#     data = request.data
-#     user = User.objects.get(id=user_id)
-#     # print(user)
-#     # print(user.id)
-#     data['user_id'] = user.id
-#     # print(data)
-#     serializer = ProfileSerializer(data=data)
-#     serializer.is_valid(raise_exception=True)
-#     serializer.save()
-#     if serializer.is_valid():
-#         try:
-#             serializer.create(validated_data=data)
-#             serializer.save()
-#             response = {
-#                 "message": "Profile created",
-#                 "data": serializer.data
-#             }
-#             return Response(data=response, status=status.HTTP_201_CREATED)
-#         except Exception as exception:
-#             return Response(data=exception.args, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(http_method_names=["POST"])
 def createProfile(request, user_id):

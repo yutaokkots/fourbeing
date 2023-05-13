@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from fourbeing.models import Test, Post
+from fourbeing.models import Test, Post, Reply
 
 # serializer for create_user request
 from django.contrib.auth.models import User
@@ -15,20 +15,17 @@ from rest_framework.response import Response
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['id','title', 'description', 'created', 'profile']
+        fields = ['id','title', 'description', 'created', 'profile', "username"]
         # extra_kwargs = {
         #     'title': {'required': True},
         #     'description': {'required': True},
         # }
 
 
-
-
 class TestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Test
         fields = ('name', 'description')
-
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -47,10 +44,6 @@ class UserSerializer(serializers.ModelSerializer):
             'password')
         extra_kwargs = {'password': {'write_only': True, 'min_length':4}}
 
-    # def createuser(self, validated_data):
-    #     print(validated_data)
-    #     return User.objects.create_user(**validated_data)
-    
 
     
 class AuthSerializer(serializers.Serializer):
@@ -76,4 +69,7 @@ class AuthSerializer(serializers.Serializer):
         attrs['user'] = user
         return 
 
-
+class ReplySerializer(serializers.Serializer):
+    class Meta:
+        model = Reply
+        fields = ['comment', 'love', 'profile', 'post']
