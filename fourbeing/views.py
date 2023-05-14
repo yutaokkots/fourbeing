@@ -88,6 +88,24 @@ def post_delete(request, post_id: int):
     # return Response(data={"error": "Post not found"}, status=status.HTTP_200_OK)
     pass
 
+# allows the update of the number of loves a comment gets
+# api/fourbeing/<post_id>/love/ 
+@api_view(http_method_names=["PUT"])
+def post_love(request, post_id: int):
+    try:
+        post = Post.objects.get(pk=post_id)
+    except Post.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND) 
+    response = {
+            "message": "Love added",
+            "data": "Thank you BTY!"
+        }
+    if post.username == "[deleted]":
+        return Response(data=response, status=status.HTTP_200_OK)
+    else:
+        post.add_love()
+        return Response(data=response, status=status.HTTP_200_OK)
+
 def test(request):
     data = Test.objects.all()
     serializer = TestSerializer(data, many=True)
@@ -132,7 +150,6 @@ def reply_create(request, post_id:int):
             return Response(data=exception.args, status=status.HTTP_400_BAD_REQUEST)
 
 # allows the update and deletion of replies
-# /api/fourbeing/<post_id>/comments/create/
 # api/fourbeing/<post_id>/comments/<reply_id>/create/ 
 @api_view(http_method_names=["PUT", "DELETE"])            
 def reply_update(request, post_id:int, reply_id:int):
@@ -153,10 +170,10 @@ def reply_update(request, post_id:int, reply_id:int):
         reply.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
         
-
+# allows the update of the number of loves a comment gets
+# api/fourbeing/<post_id>/comments/<reply_id>/love/ 
 @api_view(http_method_names=["PUT"])
 def reply_love(request, post_id:int, reply_id:int):
-    data = request.data
     try:
         reply = Reply.objects.get(pk=reply_id)
     except Reply.DoesNotExist:

@@ -16,7 +16,7 @@ class PostSerializer(serializers.ModelSerializer):
     #replies = serializers.RelatedField(many=True, read_only=True) # related field to Reply model
     class Meta:
         model = Post
-        fields = ['id','title', 'description', 'created', 'profile', "username"]
+        fields = ['id','title', 'description', 'created', 'profile', "username", "love"]
         # extra_kwargs = {
         #     'title': {'required': True},
         #     'description': {'required': True},
