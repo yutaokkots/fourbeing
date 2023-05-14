@@ -29,6 +29,11 @@ class Reply(models.Model):
         self.love += 1
         self.save()
 
+    def delete(self):
+        self.username = "[deleted]"
+        self.comment = "[deleted]"
+        self.save()
+
 class Photo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     url = models.CharField(max_length=200)

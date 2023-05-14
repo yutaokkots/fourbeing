@@ -31,17 +31,18 @@ def createpost(request):
     username = (data["username"])
     user = User.objects.get(username = username)
     data["profile"] = user.id
+    print(data)
     serializer = PostSerializer(data=data)
     serializer.is_valid(raise_exception=True)
     #print(serializer.data)
     if serializer.is_valid():
         try:
-            reply = serializer.save()
-            response_data = ReplySerializer(reply).data
+            serializer.save()
+            #response_data = ReplySerializer(reply).data
             
             response = {
                 "message": "Post created",
-                "data": response_data
+                "data": serializer.data
             }
             return Response(data=response, status=status.HTTP_201_CREATED)
         except Exception as exception:
@@ -95,12 +96,12 @@ def test(request):
 # gets all of the replies in the fourbeing page
 # api/fourbeing/<post_id>/comments/<reply_id>/
 @api_view(http_method_names=["GET"])
-def reply_index(request):
-    all_posts = Reply.objects.all()
+def reply_index(request, post_id):
+    #all_posts = Reply.objects.all()
+    all_posts = Reply.objects.filter(post=post_id)
     if request.method == "GET":
         serializer = ReplySerializer(instance=all_posts, many=True, partial=True )
 
-        print(serializer.data)
         response = { 
             "message": "posts", 
             "data": serializer.data,
@@ -113,9 +114,6 @@ def reply_index(request):
 def reply_create(request, post_id:int):
     data = request.data
     print(data["post"])
-    # post = Post.objects.get(id=post_id)
-    # print(post)
-    # data["post"] = post.id
     serializer = ReplySerializer(data=data)
     
     serializer.is_valid(raise_exception=True)
@@ -137,33 +135,40 @@ def reply_create(request, post_id:int):
 # /api/fourbeing/<post_id>/comments/create/
 # api/fourbeing/<post_id>/comments/<reply_id>/create/ 
 @api_view(http_method_names=["PUT", "DELETE"])            
-def reply_update(request, post_id:int):
-    post = get_object_or_404(Post, id=post_id)
+def reply_update(request, post_id:int, reply_id:int):
     data = request.data
+    print(data)
+    try:
+        reply= Reply.objects.get(pk=reply_id)
+    except Reply.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == "PUT":
-        serializer = PostSerializer(instance=post, data=data, partial=True)
-        print(serializer)
-        print(serializer.is_valid)
+        serializer = ReplySerializer(reply, data=data)
         if serializer.is_valid():
             serializer.save()
-            print(serializer.data)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     if request.method == "DELETE":
-        post.delete()
+        print(reply)
+        reply.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
         
-def post_delete(request, post_id: int):
-    # post = get_object_or_404(Post, pk=post_id)
-
-    # if post:
-    #     return Response(data=post, status=status.HTTP_200_OK)
-    
-    # return Response(data={"error": "Post not found"}, status=status.HTTP_200_OK)
-    pass
-
 
 @api_view(http_method_names=["PUT"])
-def reply_like(request, reply_id:int):
-    reply = Reply.objects.get(pk=reply_id)
-    reply.increment_love()
+def reply_love(request, post_id:int, reply_id:int):
+    data = request.data
+    try:
+        reply = Reply.objects.get(pk=reply_id)
+    except Reply.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND) 
+    response = {
+            "message": "Love added",
+            "data": "Things are great, either way"
+        }
+    if reply.username == "[deleted]":
+        return Response(data=response, status=status.HTTP_200_OK)
+    else:
+        reply.add_love()
+        return Response(data=response, status=status.HTTP_200_OK)
+
+    

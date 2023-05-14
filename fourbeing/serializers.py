@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 class PostSerializer(serializers.ModelSerializer):
-    replies = serializers.RelatedField(many=True, read_only=True) # related field to Reply model
+    #replies = serializers.RelatedField(many=True, read_only=True) # related field to Reply model
     class Meta:
         model = Post
         fields = ['id','title', 'description', 'created', 'profile', "username"]
@@ -70,15 +70,16 @@ class AuthSerializer(serializers.Serializer):
         return 
 
 class ReplySerializer(serializers.ModelSerializer):
-    comment = serializers.CharField()
-    username = serializers.CharField()
+    # comment = serializers.CharField()
+    # username = serializers.CharField()
 
     # user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
     # post = serializers.PrimaryKeyRelatedField(queryset=Post.objects.all(), many=True)
     class Meta:
         model = Reply
-        fields = ['comment', 'username', 'user', 'post', 'created', 'love']
+        fields = ['comment', 'username', 'user', 'post', 'created', 'love', 'id']
     
+
     # def validate_post(self, value):
     #     post_id = value
     #     post = get_object_or_404(Post, id=post_id)

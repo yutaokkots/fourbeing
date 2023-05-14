@@ -21,7 +21,8 @@ urlpatterns = [
     #path('fourbeing/<int:post_id>/comments/<int:reply_id>/create/', views.reply_create, name='reply_create'),
     path('fourbeing/<int:post_id>/comments/<int:reply_id>/update/', views.reply_update, name='reply_update'),
     path('fourbeing/<int:post_id>/comments/<int:reply_id>/delete/', views.reply_update, name='reply_delete'),
+    path('fourbeing/<int:post_id>/comments/<int:reply_id>/love/', views.reply_love, name='reply_love'),
     
     path('fourbeing/test/', views.test, name='test'),
 
-]
+]                   #/api/fourbeing/36/comments/4/update/
