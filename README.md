@@ -1,12 +1,3 @@
-
-
-<a href='https://trello.com/b/q0aZPuvv/main-board'>Trello</a>   
-<a href='https://whimsical.com/HZWw7FNg71qGuq3ahcVL1E'>Wireframe</a>   
-<a href='https://lucid.app/documents/view/7aef38fc-2ce1-4d1b-8a97-8f22d22010bd'>LucidChart</a>   
-
-
-
-
 <div align="center">
 
 # fourbeing
@@ -21,15 +12,14 @@
 
 fourbeing is a full-stack social media app (a reddit clone), that was built with React and Django frameworks, using ReactJS, Django, Django-rest-framework, PostgreSQL and styled with Tailwind CSS. 
 
-Fourbeing incorporates OpenAi translation to faciliate conversation with other foreign language speakers. 
+Fourbeing incorporates OpenAi translation to faciliate conversation with other language speakers. 
 
 <div align="center">
 
 ## [fourbeing](https://fourbeing.vercel.app/)
+## [fourbeing React app on github](https://github.com/yutaokkots/fourbeing-React)
 
 # Made with
-
-
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
@@ -51,7 +41,15 @@ Fourbeing incorporates OpenAi translation to faciliate conversation with other f
 
 </div>
 
-The name, 'fourbeing' was inspired by the following: (1) The brahmavihārā (four immeasurables), (2) Ikigai (reason for being), and (3) The Four Reminders / Preliminaries. Each of these concepts suggest following their four tenets to live fulfillingly. 
+The name, 'fourbeing' was inspired by the following: 
+
+(1) The brahmavihārā (four immeasurables), 
+
+(2) Ikigai (reason for being), and 
+
+(3) The Four Reminders / Preliminaries. 
+
+Each of these concepts suggest following their four tenets to live fulfillingly. 
 
 To that end, fourbeing was created with simplicity in mind, and ease of access for conversation and community. 
 
@@ -61,22 +59,24 @@ The App was built with a Django back-end supported by django-rest-framework to a
 
 The frontend app was built with React and the react-router-dom library. UI elements were inspired by Reddit (hence 'a reddit clone').
 
-
 This ver 1.0 of fourbeing was tailored for both mobile and desktop use.
 
-<div align="center">
-
-# Use
-
-</div>
 
 <div align="center">
 
-# Process
+# Preview
 
 <div>
 
+Potential users can immediately access the contents of the site, including posts and comments. 
 
+To participate, the app requires users to create an account, allowing the user to create new posts and add comments. 
+
+<img src="./Readme_files/fourbeing-ss-1.jpg" width="100%"/>
+
+The openAI based translation module allows users to immediately access languages other than the users'. 
+
+<img src="./Readme_files/fourbeing-ss-2.jpg" width="100%"/>
 
 <div align="center">
 
