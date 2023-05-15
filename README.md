@@ -72,11 +72,11 @@ Potential users can immediately access the contents of the site, including posts
 
 To participate, the app requires users to create an account, allowing the user to create new posts and add comments. 
 
-<img src="./Readme_files/fourbeing-ss-1.jpg" width="100%"/>
+<img src="./Readme_files/fourbeing-ss-1.jpg" width="70%"/>
 
 The openAI based translation module allows users to immediately access languages other than the users'. 
 
-<img src="./Readme_files/fourbeing-ss-2.jpg" width="100%"/>
+<img src="./Readme_files/fourbeing-ss-2.jpg" width="70%"/>
 
 <div align="center">
 
