@@ -84,6 +84,8 @@ The openAI based translation module allows users to immediately access languages
 
 </div>
 
+<div align="left">
+
 Subsequent versions that include the following features are proposed:
 
 - Completing the Photo model and Image model to allow users to add pictures to their profiles and posts.
@@ -96,11 +98,13 @@ Subsequent versions that include the following features are proposed:
 
 - AI assistant that is easily accessible when communicating with other users. 
 
-
 # Resources
+
 - [openai](https://platform.openai.com/docs/introduction)
 - [tailwindcss](https://tailwindcss.com/docs/installation)
 - [react](https://react.dev/reference/react)
 - [react-router-dom](https://reactrouter.com/en/main)
 - [django](https://docs.djangoproject.com/en/4.2/)
 - [django-rest-framework](https://www.django-rest-framework.org/#installation)
+
+</div>
