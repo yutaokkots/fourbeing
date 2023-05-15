@@ -48,7 +48,7 @@ class LoginSerializer(serializers.Serializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['user','title', 'bio', 'location', 'website']
+        fields = ['user_id','title', 'bio', 'location', 'website', 'username']
 
     def create(self, validated_data):
         username = validated_data['user']
