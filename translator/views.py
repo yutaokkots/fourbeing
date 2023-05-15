@@ -25,7 +25,8 @@ language_dict = {
     "fr":"French", 
     "it":"Italian", 
     "hi":"Hindi", 
-    "uk":"Ukranian"}
+    "uk":"Ukranian",
+    "my":"Burmese"}
 
 
 @api_view(http_method_names=["POST"])
