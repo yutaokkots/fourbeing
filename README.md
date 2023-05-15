@@ -16,7 +16,7 @@ Fourbeing incorporates OpenAi translation to faciliate conversation with other l
 
 <div align="center">
 
-## [fourbeing](https://fourbeing.vercel.app/)
+## [-> fourbeing <-](https://fourbeing.vercel.app/)
 ## [fourbeing React app on github](https://github.com/yutaokkots/fourbeing-React)
 
 # Made with
@@ -98,7 +98,15 @@ Subsequent versions that include the following features are proposed:
 
 - AI assistant that is easily accessible when communicating with other users. 
 
+</div>
+
+<div align="center">
+
 # Resources
+
+</div>
+
+<div align="left">
 
 - [openai](https://platform.openai.com/docs/introduction)
 - [tailwindcss](https://tailwindcss.com/docs/installation)
