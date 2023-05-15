@@ -1,10 +1,15 @@
+import uuid
+import boto3
+import os
+
 from django.shortcuts import render, redirect
-from useraccounts.models import Profile
+from useraccounts.models import Profile, Photo
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from useraccounts.serializers import ProfileSerializer
 from django.contrib.auth.models import User
+
 
 @api_view(http_method_names=["GET"])  
 def getProfile(request, user_id):
@@ -54,3 +59,21 @@ def editProfile(request, user_id):
             print(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+# user/profile/<int:user_id>/add_photo/
+@api_view(http_method_names=["POST"])
+def add_photo(request, cat_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        # need a unique "key" for S3 
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            bucket = os.environ['S3_BUCKET']
+            s3.upload_fileobj(photo_file, bucket, key)
+            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+            Photo.objects.create(url=url, cat_id=cat_id)
+        except Exception as e:
+            print('An error occurred uploading file to S3')
+            print(e)
+    #return redirect('detail', cat_id=cat_id)

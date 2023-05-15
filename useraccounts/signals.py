@@ -3,7 +3,7 @@
 from django.db.models.signals import post_save, pre_delete
 from django.contrib.auth.models import User
 from django.dispatch import receiver
-from fourbeing.models import Profile
+from useraccounts.models import Profile
  
 ## receivers receive the signal and performs a function
 ## in this case, an instance of a profile is created, and saved. 

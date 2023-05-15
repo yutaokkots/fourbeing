@@ -15,3 +15,9 @@ class Profile(models.Model):
        return self.user.username
     
 
+class Photo(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    url = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f"Photo for user: {self.user_id} @{self.url}"

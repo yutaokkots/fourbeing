@@ -5,7 +5,6 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.utils import timezone
-from useraccounts.models import Profile
 
 
 class Post(models.Model):
@@ -40,19 +39,13 @@ class Reply(models.Model):
         self.comment = "[deleted]"
         self.save()
 
-class Photo(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    url = models.CharField(max_length=200)
-    userPhoto = models.ForeignKey(Profile, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"Photo for user: {self.user_id} @{self.url}"
 
 
 # This test class was created to experiment with initial api calls
 class Test(models.Model):
   name = models.CharField(max_length=50)
   description = models.CharField(max_length=100)
+
   def __str__(self):
     return f"This test returned: ${self.name}"
   

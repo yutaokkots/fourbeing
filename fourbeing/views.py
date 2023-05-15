@@ -1,5 +1,6 @@
-from fourbeing.models import Test
 
+
+from fourbeing.models import Test
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from fourbeing.serializers import TestSerializer, PostSerializer, ReplySerializer, AuthSerializer #from 'serializers.py' file
@@ -154,7 +155,6 @@ def reply_create(request, post_id:int):
 @api_view(http_method_names=["PUT", "DELETE"])            
 def reply_update(request, post_id:int, reply_id:int):
     data = request.data
-    print(data)
     try:
         reply= Reply.objects.get(pk=reply_id)
     except Reply.DoesNotExist:
@@ -166,7 +166,6 @@ def reply_update(request, post_id:int, reply_id:int):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     if request.method == "DELETE":
-        print(reply)
         reply.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
         
@@ -188,4 +187,3 @@ def reply_love(request, post_id:int, reply_id:int):
         reply.add_love()
         return Response(data=response, status=status.HTTP_200_OK)
 
-    
