@@ -5,11 +5,12 @@ import os
 from django.shortcuts import render, redirect
 from useraccounts.models import Profile, Photo
 from rest_framework.response import Response
+from rest_framework.request import Request
 from rest_framework import status
 from rest_framework.decorators import api_view
-from useraccounts.serializers import ProfileSerializer
+from useraccounts.serializers import ProfileSerializer, PhotoSerializer
 from django.contrib.auth.models import User
-
+from rest_framework.parsers import MultiPartParser
 
 @api_view(http_method_names=["GET"])  
 def getProfile(request, user_id):
@@ -26,7 +27,7 @@ def getProfile(request, user_id):
             "message": "No profile exists",
             "profile": "None"
         }
-        return Response(data=response, status=status.HTTP_200_OK)
+        return Response(data=response, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(http_method_names=["POST"])
@@ -60,20 +61,72 @@ def editProfile(request, user_id):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-# user/profile/<int:user_id>/add_photo/
+    
+# user/profile/<int:user_id>/get_photo/
+@api_view(http_method_names=["GET"])
+def get_photo(request, user_id):
+    try:
+        photo = Photo.objects.get(user_id=user_id)
+        serializer = PhotoSerializer(photo)
+        response = {
+            "message": "Profile details",
+            "photo": serializer.data
+        }
+        return Response(data=response, status=status.HTTP_200_OK)
+    except Photo.DoesNotExist:
+        response = {
+            "message": "No profile photo exists",
+            "photo": "None"
+        }
+        return Response(data=response, status=status.HTTP_400_BAD_REQUEST)
+
+
+# apit/auth/user/profile/<int:user_id>/add_photo/
 @api_view(http_method_names=["POST"])
-def add_photo(request, cat_id):
-    photo_file = request.FILES.get('photo-file', None)
-    if photo_file:
+def add_photo(request, user_id):
+    image_file = request.FILES.get('imgfile', None)
+    if image_file:
         s3 = boto3.client('s3')
         # need a unique "key" for S3 
-        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        key = uuid.uuid4().hex[:6] + image_file.name[image_file.name.rfind('.'):]
         try:
             bucket = os.environ['S3_BUCKET']
-            s3.upload_fileobj(photo_file, bucket, key)
+            s3.upload_fileobj(image_file, bucket, key)
             url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
-            Photo.objects.create(url=url, cat_id=cat_id)
+            photo = Photo.objects.create(url=url, user_id=user_id)
+            serializer = PhotoSerializer(photo)
+            response = {
+                "message": "Profile details",
+                "photo": serializer.data
+            }
+            return Response(data=response, status=status.HTTP_200_OK)
         except Exception as e:
             print('An error occurred uploading file to S3')
             print(e)
-    #return redirect('detail', cat_id=cat_id)
+            return Response(data=response, status=status.HTTP_400_BAD_REQUEST)
+        
+
+# apit/auth/user/profile/<int:user_id>/edit_photo/
+@api_view(http_method_names=["PUT"])
+def edit_photo(request, user_id):
+    image_file = request.FILES.get('imgfile', None)
+    if image_file:
+        s3 = boto3.client('s3')
+        # need a unique "key" for S3 
+        key = uuid.uuid4().hex[:6] + image_file.name[image_file.name.rfind('.'):]
+        try:
+            bucket = os.environ['S3_BUCKET']
+            s3.upload_fileobj(image_file, bucket, key)
+            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+            Photo.objects.filter(user_id=user_id).update(url=url)
+            photo = Photo.objects.get(user_id=user_id)
+            serializer = PhotoSerializer(photo)
+            response = {
+                "message": "Profile details",
+                "photo": serializer.data
+            }
+            return Response(data=response, status=status.HTTP_200_OK)
+        except Exception as e:
+            print('An error occurred uploading file to S3')
+            print(e)
+            return Response(status=status.HTTP_400_BAD_REQUEST)

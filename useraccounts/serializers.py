@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, get_user_model
-from useraccounts.models import Profile
+from useraccounts.models import Profile, Photo
 
 #create user Serializer
 class UserSerializer(serializers.ModelSerializer):
@@ -61,3 +61,9 @@ class ProfileSerializer(serializers.ModelSerializer):
             website=validated_data['website'],
         )
         return profile
+    
+
+class PhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photo
+        fields = ['user_id', 'url']
