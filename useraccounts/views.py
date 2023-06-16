@@ -12,6 +12,7 @@ from useraccounts.serializers import ProfileSerializer, PhotoSerializer
 from django.contrib.auth.models import User
 from rest_framework.parsers import MultiPartParser
 
+# user/profile/<int:user_id>/
 @api_view(http_method_names=["GET"])  
 def getProfile(request, user_id):
     try:
@@ -35,7 +36,7 @@ def createProfile(request, user_id):
     data = request.data
     # user = User.objects.get(id=user_id)
     data['user'] = user_id  # change 'user_id' to 'user'
-    serializer = ProfileSerializer(data=data)
+    serializer = ProfileSerializer(data=data, partial=True)
     serializer.is_valid(raise_exception=True)
     serializer.save()
     response = {
