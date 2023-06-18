@@ -51,8 +51,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ['user_id','title', 'bio', 'location', 'website', 'username']
 
     def create(self, validated_data):
-        username = validated_data['user']
-        user = User.objects.get(username=username)
+        user = User.objects.get(username=validated_data['username'])
         profile = Profile.objects.create(
             user=user,
             title=validated_data['title'], 
@@ -62,6 +61,15 @@ class ProfileSerializer(serializers.ModelSerializer):
         )
         return profile
     
+    def update(self, instance, validated_data):
+        # Update the instance fields with the validated data
+        instance.title = validated_data.get('title', instance.title)
+        instance.bio = validated_data.get('bio', instance.bio)
+        instance.location = validated_data.get('location', instance.location)
+        instance.website = validated_data.get('website', instance.website)
+        instance.save()
+
+        return instance
 
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:

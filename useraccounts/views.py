@@ -48,18 +48,22 @@ def createProfile(request, user_id):
 @api_view(http_method_names=["PUT"])
 def editProfile(request, user_id):
     data = request.data
-    print(data)
-    print(user_id)
+    print(data)     ##
+    print(user_id)  ##
     try:
         profile = Profile.objects.get(pk=user_id)
+        print(profile)  ##
     except Profile.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == "PUT":
-        serializer = ProfileSerializer(profile, data=data)
+        serializer = ProfileSerializer(profile, data=data, partial=True)
+        print("hello")  ##
         if serializer.is_valid():
             serializer.save()
-            print(serializer.data)
+            print(serializer.data)  ##
+            print("did it not work?")   ##
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print("goodbye")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     

@@ -4,16 +4,18 @@ from rest_framework.request import Request
 
 from rest_framework.serializers import DateTimeField
 #from knox.models import AuthToken
-from useraccounts.serializers import UserSerializer, UsernameSerializer, LoginSerializer, CreateUserSerializer
+from useraccounts.serializers import UserSerializer, UsernameSerializer, ProfileSerializer, LoginSerializer, CreateUserSerializer
 
 from django.utils import timezone
 #from knox.auth import TokenAuthentication
 #from knox.settings import knox_settings, CONSTANTS
 #from knox.views import LoginView as KnoxLoginView
+
 from rest_framework import status
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.contrib.auth import authenticate, password_validation
 from fourbeing.models import User
+from useraccounts.models import Profile
 from useraccounts.tokens import create_jwt_pair_for_user, MyTokenObtainPairSerializer, MyTokenObtainPairView
 from django import forms
 from django.core.exceptions import ValidationError
@@ -22,15 +24,27 @@ import json
 
 # Register API -> registers user, generates token, and returns 
 class RegisterAPI(generics.GenericAPIView):
-    serializer_class = CreateUserSerializer
-    
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data)
+        serializer = CreateUserSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            user_instance = serializer.save()
+            user_id = user_instance.id
             username = request.data["username"]
             password = request.data["password"]
             user = authenticate(username=username, password=password)
+            print(user_id)
+            data = {
+                "username": username,
+                "title": "",
+                "bio": "",
+                "location": "",
+                "website": ""
+            }
+            profile = Profile.objects.filter(user_id=user_id).first()
+            if profile:
+                profile.username = username
+                profile.save()
+            print(profile)
             response = {
                 "message":"user created successfully",
                 "token": "getToken"
