@@ -32,17 +32,10 @@ class RegisterAPI(generics.GenericAPIView):
             username = request.data["username"]
             password = request.data["password"]
             user = authenticate(username=username, password=password)
-            print(user_id)
-            data = {
-                "username": username,
-                "title": "",
-                "bio": "",
-                "location": "",
-                "website": ""
-            }
             profile = Profile.objects.filter(user_id=user_id).first()
             if profile:
                 profile.username = username
+                profile.title = "New user!"
                 profile.save()
             print(profile)
             response = {
