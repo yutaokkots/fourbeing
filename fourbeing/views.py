@@ -63,12 +63,9 @@ def createpostphoto(request):
         data_json = request.POST.get("postdata", None)
         if data_json:
             data = json.loads(data_json)
-            #data_user = request.POST.get("username", None)
-            #print(data_user)
-            # blob_data = data[0]  # Assuming blob_data is sent as a POST parameter
-            # decoded_data = base64.b64decode(blob_data)
-            #print(data)
-            print(image_file)
+            username = (data["username"])
+            user = User.objects.get(username = username)
+            data["profile"] = user.id
             s3 = boto3.client('s3')
             # need a unique "key" for S3 
             key = uuid.uuid4().hex[:6] + image_file.name[image_file.name.rfind('.'):]
