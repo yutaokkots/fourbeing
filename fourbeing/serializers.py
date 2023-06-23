@@ -17,7 +17,7 @@ class PostSerializer(serializers.ModelSerializer):
     #replies = serializers.RelatedField(many=True, read_only=True) # related field to Reply model
     class Meta:
         model = Post
-        fields = ['id','title', 'description', 'created', 'profile', "username", "love", "comments"]
+        fields = ['id','title', 'description', 'created', 'profile', "username", "love", "photo", "comments"]
         
     def get_comments(self, obj):
         return obj.replies.count()

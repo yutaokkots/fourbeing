@@ -12,6 +12,7 @@ urlpatterns = [
     # api/fourbeing/
     path('fourbeing/', views.index, name="index" ),
     path('fourbeing/create/', views.createpost, name="createpost" ),
+    path('fourbeing/createPhoto/', views.createpostphoto, name="createpostphoto" ),
     path('fourbeing/<int:post_id>/', views.post_detail, name='post_detail'),
     path('fourbeing/<int:post_id>/update/', views.post_update, name='post_update'),
     path('fourbeing/<int:post_id>/delete/', views.post_update, name='post_delete'),

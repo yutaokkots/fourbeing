@@ -1,3 +1,10 @@
+import uuid
+import boto3
+import os
+import json
+import base64
+
+
 from fourbeing.models import Test
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
@@ -46,7 +53,68 @@ def createpost(request):
             return Response(data=response, status=status.HTTP_201_CREATED)
         except Exception as exception:
             return Response(data=exception.args, status=status.HTTP_400_BAD_REQUEST)
+        
+# allows the creation of new posts
+# api/fourbeing/createPhoto/
+@api_view(http_method_names=["POST"])
+def createpostphoto(request):
+    image_file = request.FILES.get('imgfile', None)
+    if image_file:
+        data_json = request.POST.get("postdata", None)
+        if data_json:
+            data = json.loads(data_json)
+            #data_user = request.POST.get("username", None)
+            #print(data_user)
+            # blob_data = data[0]  # Assuming blob_data is sent as a POST parameter
+            # decoded_data = base64.b64decode(blob_data)
+            #print(data)
+            print(image_file)
+            s3 = boto3.client('s3')
+            # need a unique "key" for S3 
+            key = uuid.uuid4().hex[:6] + image_file.name[image_file.name.rfind('.'):]
+            try:
+                bucket = os.environ['S3_BUCKET']
+                s3.upload_fileobj(image_file, bucket, key)
+                url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+                data["photo"] = url
+                serializer = PostSerializer(data=data)
+                if serializer.is_valid(raise_exception=True):
+                    serializer.save()
+                    response = {
+                        "message": "Profile details",
+                        "photo": serializer.data
+                    }
+                    return Response(data=response, status=status.HTTP_200_OK)
+            except Exception as e:
+                print('An error occurred uploading file to S3')
+                print(e)
+                return Response(data=response, status=status.HTTP_400_BAD_REQUEST)
+
+    # username = (data["username"])
+    # description = (data["description"])
+    # print(username)
+    # print(description)
+    # user = User.objects.get(username = username)
+    # data["profile"] = user.id
+    # print(data)
+    # serializer = PostSerializer(data=data)
+    # serializer.is_valid(raise_exception=True)
+    # #print(serializer.data)
+    # if serializer.is_valid():
+    #     try:
+    #         serializer.save()
+    #         #response_data = ReplySerializer(reply).data
             
+    #         response = {
+    #             "message": "Post created",
+    #             "data": serializer.data
+    #         }
+    #         return Response(data=response, status=status.HTTP_201_CREATED)
+    #     except Exception as exception:
+    #         return Response(data=exception.args, status=status.HTTP_400_BAD_REQUEST)
+            
+
+
 # allows the retrieval of a single post, returns the profile name as well
 # api/fourbeing/<post_id>/
 @api_view(http_method_names=["GET"])
