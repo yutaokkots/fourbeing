@@ -4,11 +4,13 @@ import os
 
 from django.shortcuts import render, redirect
 from useraccounts.models import Profile, Photo
+from fourbeing.models import Post, Reply
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework import status
 from rest_framework.decorators import api_view
 from useraccounts.serializers import ProfileSerializer, PhotoSerializer
+from fourbeing.serializers import PostSerializer
 from django.contrib.auth.models import User
 from rest_framework.parsers import MultiPartParser
 
@@ -28,7 +30,7 @@ def getProfile(request, user_id):
             "message": "No profile exists",
             "profile": "None"
         }
-        return Response(data=response, status=status.HTTP_400_BAD_REQUEST)
+        return Response(data=response, status=status.HTTP_200_OK)
 
 
 @api_view(http_method_names=["POST"])
@@ -67,7 +69,7 @@ def editProfile(request, user_id):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     
-# user/profile/<int:user_id>/get_photo/
+# api/auth/user/profile/<int:user_id>/get_photo/
 @api_view(http_method_names=["GET"])
 def get_photo(request, user_id):
     try:
@@ -86,7 +88,7 @@ def get_photo(request, user_id):
         return Response(data=response, status=status.HTTP_400_BAD_REQUEST)
 
 
-# apit/auth/user/profile/<int:user_id>/add_photo/
+# api/auth/user/profile/<int:user_id>/add_photo/
 @api_view(http_method_names=["POST"])
 def add_photo(request, user_id):
     image_file = request.FILES.get('imgfile', None)
@@ -111,7 +113,7 @@ def add_photo(request, user_id):
             return Response(data=response, status=status.HTTP_400_BAD_REQUEST)
         
 
-# apit/auth/user/profile/<int:user_id>/edit_photo/
+# api/auth/user/profile/<int:user_id>/edit_photo/
 @api_view(http_method_names=["PUT"])
 def edit_photo(request, user_id):
     image_file = request.FILES.get('imgfile', None)
@@ -135,3 +137,17 @@ def edit_photo(request, user_id):
             print('An error occurred uploading file to S3')
             print(e)
             return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+# api/auth/user/profile/<int:user_id>/get_all_posts/
+@api_view(http_method_names=["GET"])
+def get_all_posts(request, user_id:int):
+    all_user_posts = Post.objects.filter(profile=user_id)
+    print(all_user_posts)
+    serializer = PostSerializer(instance=all_user_posts, many=True, partial=True)
+    response = { 
+        "message": "posts", 
+        "data": serializer.data,
+    }
+    print(response)
+    return Response(data=response, status=status.HTTP_200_OK)
+    pass
