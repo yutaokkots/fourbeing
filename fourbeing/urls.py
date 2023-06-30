@@ -15,7 +15,7 @@ urlpatterns = [
     path('fourbeing/createPhoto/', views.createpostphoto, name="createpostphoto" ),
     path('fourbeing/<int:post_id>/', views.post_detail, name='post_detail'),
     path('fourbeing/<int:post_id>/update/', views.post_update, name='post_update'),
-    path('fourbeing/<int:post_id>/delete/', views.post_update, name='post_delete'),
+    path('fourbeing/<int:user_id>/<int:post_id>/delete/', views.post_delete, name='post_delete'),
     path('fourbeing/<int:post_id>/love/', views.post_love, name='post_love'),
 
     path('fourbeing/<int:post_id>/comments/', views.reply_index, name='reply_detail'),

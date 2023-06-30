@@ -127,9 +127,9 @@ def post_detail(request, post_id: int):
     }    
     return Response(data=response, status=status.HTTP_200_OK)
 
-# allows the update or deletion of a post
+# allows the update of a post
 # api/fourbeing/<post_id>/update or api/fourbeing/<post_id>/update
-@api_view(http_method_names=["PUT", "DELETE"])            
+@api_view(http_method_names=["PUT"])            
 def post_update(request, post_id: int):
     post = get_object_or_404(Post, id=post_id)
     data = request.data
@@ -139,18 +139,21 @@ def post_update(request, post_id: int):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    if request.method == "DELETE":
-        post.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-        
-def post_delete(request, post_id: int):
-    # post = get_object_or_404(Post, pk=post_id)
-
-    # if post:
-    #     return Response(data=post, status=status.HTTP_200_OK)
     
-    # return Response(data={"error": "Post not found"}, status=status.HTTP_200_OK)
-    pass
+# allows the deletion of a post
+@api_view(http_method_names=["DELETE"])    
+def post_delete(request, user_id:int, post_id:int):
+    post = get_object_or_404(Post, id=post_id)
+    try:
+        if post.profile_id == user_id and request.method == "DELETE":
+            post.delete()
+            response = {
+                "message": "deleted"
+            }
+            return Response(data=response, status=status.HTTP_200_OK)
+    except:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 # allows the update of the number of loves a comment gets
 # api/fourbeing/<post_id>/love/ 

@@ -108,13 +108,15 @@ WSGI_APPLICATION = 'backendserver.wsgi.application'
 #     }
 # }
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ['DB_NAME'],
         'USER': os.environ['DB_USER'],
         'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': 'db.bit.io',
+        'HOST': 'fourbeing-db.czk1n1uclqyr.us-east-2.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
