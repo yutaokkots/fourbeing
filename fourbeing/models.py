@@ -27,7 +27,7 @@ class Reply(models.Model):
     username = models.CharField(max_length=50)
     comment = models.CharField(max_length=2000)
     love = models.IntegerField(default=0, null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='replies', null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='replies')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='replies')
     created = models.DateTimeField(auto_now_add=True)
 

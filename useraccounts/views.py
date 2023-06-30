@@ -152,6 +152,7 @@ def get_all_posts(request, user_id:int):
 # api/auth/user/profile/<int:user_id>/get_all_replies/
 @api_view(http_method_names=["GET"])
 def get_all_replies(request, user_id:int):
+    print("here")
     all_user_replies = Reply.objects.filter(user=user_id)
     serializer = ReplySerializer(instance=all_user_replies, many=True, partial=True)
     response = { 

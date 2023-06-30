@@ -198,7 +198,6 @@ def reply_index(request, post_id):
 @api_view(http_method_names=["POST"])
 def reply_create(request, post_id:int):
     data = request.data
-    print(data["post"])
     serializer = ReplySerializer(data=data)
     
     serializer.is_valid(raise_exception=True)
