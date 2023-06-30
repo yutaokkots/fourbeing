@@ -10,7 +10,7 @@ from rest_framework.request import Request
 from rest_framework import status
 from rest_framework.decorators import api_view
 from useraccounts.serializers import ProfileSerializer, PhotoSerializer
-from fourbeing.serializers import PostSerializer
+from fourbeing.serializers import PostSerializer, ReplySerializer
 from django.contrib.auth.models import User
 from rest_framework.parsers import MultiPartParser
 
@@ -142,12 +142,21 @@ def edit_photo(request, user_id):
 @api_view(http_method_names=["GET"])
 def get_all_posts(request, user_id:int):
     all_user_posts = Post.objects.filter(profile=user_id)
-    print(all_user_posts)
     serializer = PostSerializer(instance=all_user_posts, many=True, partial=True)
+    response = { 
+        "message": "posts", 
+        "data": serializer.data,
+    }
+    return Response(data=response, status=status.HTTP_200_OK)
+
+# api/auth/user/profile/<int:user_id>/get_all_replies/
+@api_view(http_method_names=["GET"])
+def get_all_replies(request, user_id:int):
+    all_user_replies = Reply.objects.filter(user=user_id)
+    serializer = ReplySerializer(instance=all_user_replies, many=True, partial=True)
     response = { 
         "message": "posts", 
         "data": serializer.data,
     }
     print(response)
     return Response(data=response, status=status.HTTP_200_OK)
-    pass
